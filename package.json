@@ -1,0 +1,23 @@
+{
+  "name": "time-mistress",
+  "version": "1.0.0-alpha",
+  "private": true,
+  "scripts": {
+    "dev": "next dev",
+    "build": "next build",
+    "start": "next start -p 3000",
+    "test": "jest"
+  },
+  "dependencies": {
+    "next": "11.0.1",
+    "react": "17.0.1",
+    "react-dom": "17.0.1"
+  },
+  "devDependencies": {
+    "babel-jest": "^26.6.3",
+    "eslint": "^7.32.0",
+    "eslint-config-next": "^11.0.1",
+    "identity-obj-proxy": "^3.0.0",
+    "jest": "^26.6.3"
+  }
+}
