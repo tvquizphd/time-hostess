@@ -16,17 +16,14 @@ yarn install
 
 ## Run dev server
 
-Open development port.
-
-```
-firewall-cmd --zone=public --permanent --add-port=3000/tcp
-firewall-cmd --reload
-```
-
-Run the development server.
+Run the development server:
 ```
 yarn dev
 ```
+
+On a local machine, ssh tunnel into the debugger
+ssh -nNT -L 8888:localhost:8888 root@time-hostess.com
+
 
 ## Run production server
 
