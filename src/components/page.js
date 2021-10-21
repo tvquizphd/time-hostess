@@ -4,7 +4,7 @@ import { hastToReact } from 'hot-cold-guide'
 import { getFeeling } from '../../lib/queries'
 import Happiness from './happiness'
 import {
-  GuideDiv
+  GuideElement
 } from './guide'
 
 const Page = (props) => {
@@ -18,7 +18,16 @@ const Page = (props) => {
 
   const content = hastToReact(props.body, {
     components: {
-      div: GuideDiv
+      a: GuideElement('a'),
+      p: GuideElement('p'),
+      h1: GuideElement('h1'),
+      h2: GuideElement('h2'),
+      h3: GuideElement('h3'),
+      h4: GuideElement('h4'),
+      h5: GuideElement('h5'),
+      h6: GuideElement('h6'),
+      div: GuideElement('div'),
+      span: GuideElement('span')
     }
   })
   return (

@@ -4,23 +4,30 @@
 }
 
 .warmest {
-  background-color: rgb(178,24,43)
+  color: rgb(244, 234, 224);
+  background-color: rgb(178,24,43);
 } 
 .warmer {
-  background-color: rgb(239,138,98)
+  color: rgb(19, 21, 22);
+  background-color: rgb(239,138,98);
 } 
 .warm {
-  background-color: rgb(253,219,199)
+  color: rgb(19, 21, 22);
+  background-color: rgb(253,219,199);
 } 
 .none {
-  background-color: rgb(247,247,247)
+  color: rgb(19, 21, 22);
+  background-color: rgb(247,247,247);
 } 
 .cool {
-  background-color: rgb(209,229,240)
+  color: rgb(19, 21, 22);
+  background-color: rgb(209,229,240);
 } 
 .cooler {
-  background-color: rgb(103,169,207)
+  color: rgb(19, 21, 22);
+  background-color: rgb(103,169,207);
 } 
 .coolest {
-  background-color: rgb(33,102,172)
+  color: rgb(224, 234, 244);
+  background-color: rgb(33,102,172);
 }

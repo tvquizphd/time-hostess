@@ -3952,10 +3952,10 @@ hosted-git-info@^2.1.4:
   resolved "https://registry.yarnpkg.com/hosted-git-info/-/hosted-git-info-2.8.9.tgz#dffc0bf9a21c02209090f2aa69429e1414daf3f9"
   integrity sha512-mxIDAb9Lsm6DoOJ7xH+5+X4y1LU/4Hi50L9C5sIswK3JzULS4bwk1FvjdBgvYR4bzT4tuUQiC15FE2f5HbLvYw==
 
-hot-cold-guide@^1.0.0-alpha.4.1:
-  version "1.0.0-alpha.4.1"
-  resolved "https://registry.yarnpkg.com/hot-cold-guide/-/hot-cold-guide-1.0.0-alpha.4.1.tgz#cdfd562d77fddb87deb21a3b2800f7f7cca64bec"
-  integrity sha512-jeLwNYuef407C87Lbhtojst0/gKUpc/fc2vd4lm9ummchGQV/tpEXjoICenG7I3yNpZU11Hc+b1zCfLEdEItPA==
+hot-cold-guide@^1.0.0-alpha.4.2:
+  version "1.0.0-alpha.4.2"
+  resolved "https://registry.yarnpkg.com/hot-cold-guide/-/hot-cold-guide-1.0.0-alpha.4.2.tgz#f0b2184f2f68597f1606829362151698d7acb153"
+  integrity sha512-D7pdpuoLasq3QjlzjL3I6aPcLfpl6IuhAMaaRIPdmwgorvTYmYbMU8OxnEzYatEKS9+0FOuhvt4FUxkB0dCdPA==
   dependencies:
     hastscript "^7.0.2"
     react "^17.0.2"
