@@ -1,3 +1,4 @@
+import { applyGuide } from '../../lib/guide'
 import withApollo from '../../lib/withApollo'
 import Page from '../components/page'
 import process from 'process'
@@ -53,9 +54,9 @@ export const getStaticPaths = () => {
   }
 }
 
-const makePropsDefault = (root) => {
+const makePropsDefault = (body) => {
   return {
-    root,
+    body,
     SECRET: null
   }
 }
@@ -87,11 +88,14 @@ export const getStaticProps = async (context) => {
 	console.log(`Loaded .env`)
 	const { SECRET } = process.env
 
+  // Run html page through all of the guides
+  const root = applyGuide('./static/index.html')
+  const body = root.children[1].children[1]
+  body.tagName = "div"
+
   return {
     props: {
-      ...makePropsDefault({
-        nodes: []
-      }),
+      ...makePropsDefault(body),
       SECRET: SECRET || null
     },
     revalidate

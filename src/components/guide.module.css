@@ -1,0 +1,26 @@
+/* https://colorbrewer2.org/?type=diverging&scheme=RdBu&n=7 */
+.hot {
+  color: red;
+}
+
+.warmest {
+  background-color: rgb(178,24,43)
+} 
+.warmer {
+  background-color: rgb(239,138,98)
+} 
+.warm {
+  background-color: rgb(253,219,199)
+} 
+.none {
+  background-color: rgb(247,247,247)
+} 
+.cool {
+  background-color: rgb(209,229,240)
+} 
+.cooler {
+  background-color: rgb(103,169,207)
+} 
+.coolest {
+  background-color: rgb(33,102,172)
+}

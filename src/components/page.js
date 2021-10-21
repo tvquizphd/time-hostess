@@ -1,7 +1,11 @@
 import React, { useState } from 'react'
 import { useQuery } from "@apollo/client"
+import { hastToReact } from 'hot-cold-guide'
 import { getFeeling } from '../../lib/queries'
 import Happiness from './happiness'
+import {
+  GuideDiv
+} from './guide'
 
 const Page = (props) => {
 
@@ -12,6 +16,11 @@ const Page = (props) => {
 		notifyOnNetworkStatusChange: true
 	});
 
+  const content = hastToReact(props.body, {
+    components: {
+      div: GuideDiv
+    }
+  })
   return (
     <div>
       <div>
@@ -29,6 +38,7 @@ const Page = (props) => {
           onChange={e => setInputText(e.target.value)}
         />
       </div>
+      {content}
     </div>
   )
 }
