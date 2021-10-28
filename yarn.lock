@@ -1760,13 +1760,11 @@ hmac-drbg@^1.0.1:
     minimalistic-assert "^1.0.0"
     minimalistic-crypto-utils "^1.0.1"
 
-hot-cold-guide@^1.0.0-alpha.5.0:
-  version "1.0.0-alpha.5.0"
-  resolved "https://registry.yarnpkg.com/hot-cold-guide/-/hot-cold-guide-1.0.0-alpha.5.0.tgz#ef2a2ca000388cb5cacd7bd1f180fedfbba0d87e"
-  integrity sha512-HCvLfjjFJ2iPwfPj0adPtXLUcW3Di0pzLlfSjJ69F8qN5CEazItYBm0BX68F1vg34DTcaC4Ck0WDGjfw9fMVSg==
+hot-cold-guide@^1.0.0-alpha.6.0:
+  version "1.0.0-alpha.6.0"
+  resolved "https://registry.yarnpkg.com/hot-cold-guide/-/hot-cold-guide-1.0.0-alpha.6.0.tgz#d17e68a8992f2b7c02972c44450da2f24c495731"
+  integrity sha512-maJezo0KFqy2Sq37zBQBg4WIvlfXDMsHpSEHgrakW8XiY+dp+E5rvlrA1NFQK7DnEJJ+eyW8I7ERctO+L1mQOg==
   dependencies:
-    hot-cold-retext "^1.0.0-alpha.1.0"
-    hot-cold-test-lib "^1.0.0-alpha.1.0"
     react "^17.0.2"
     rehype "^12.0.0"
     rehype-react "^7.0.3"
@@ -1777,19 +1775,14 @@ hot-cold-guide@^1.0.0-alpha.5.0:
     unist-util-visit "^4.1.0"
     vfile "^5.1.1"
 
-hot-cold-retext@^1.0.0-alpha.1.0:
-  version "1.0.0-alpha.1.0"
-  resolved "https://registry.yarnpkg.com/hot-cold-retext/-/hot-cold-retext-1.0.0-alpha.1.0.tgz#0d016c7b425a19b390ba480d01d419d9c14241e8"
-  integrity sha512-rvdp31GMIUptojmnhQah0ZMthO3W6U3nlPBAsJ89UZjYVuiAeAX+yuyJ05RD9CtFf9kEDRs08HYYyYuLTpFgkQ==
+hot-cold-retext@^1.0.0-alpha.2.0:
+  version "1.0.0-alpha.2.0"
+  resolved "https://registry.yarnpkg.com/hot-cold-retext/-/hot-cold-retext-1.0.0-alpha.2.0.tgz#e3af269bf6bb759cdf72a7a875e7050eb73c1b79"
+  integrity sha512-a9gcrrGoOJXvVF+1Jw6IhjOYcduCt4sUC6Pf1q5FIoWQoTYi8akABCea2xz9Z8Ybe1ls2OaVaHwmBRECA1AzHQ==
   dependencies:
     nlcst-to-string "^3.1.0"
     node-nlp "^4.22.1"
     unist-util-select "^4.0.0"
-
-hot-cold-test-lib@^1.0.0-alpha.1.0:
-  version "1.0.0-alpha.1.0"
-  resolved "https://registry.yarnpkg.com/hot-cold-test-lib/-/hot-cold-test-lib-1.0.0-alpha.1.0.tgz#1be15a37beda86505eb1e383a397fea90a63e808"
-  integrity sha512-E38ZjSnSh+tZQZK6hPnPrMnqDKt6EfOLQKlExaV0MI9VvyTP5CmJui9CcpBA3edznEUi4BEyf4ddLEgoYqYzrg==
 
 html-void-elements@^2.0.0:
   version "2.0.0"

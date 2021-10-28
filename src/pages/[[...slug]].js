@@ -1,10 +1,15 @@
-import { applyGuide } from '../../lib/guide'
+import { findSentimentGuide } from '../lib/guide'
+import { useRouter } from 'next/router'
 import Page from '../components/page'
 import process from 'process'
 import dotenv from 'dotenv'
-import { useRouter } from 'next/router'
+// Use filesystem only in getStaticProps
+import fs from 'fs'
+import {
+  retextSentiment
+} from 'hot-cold-retext'
 
-const staticRegenerationError = (message) => {
+function staticRegenerationError(message) {
   this.message = message
   this.name = 'staticRegenerationError'
 }
@@ -86,8 +91,18 @@ export const getStaticProps = async (context) => {
 	}
 	const { SECRET } = process.env
 
+  const path = './public/index.html'
+  const text = fs.readFileSync(path, {
+    encoding:'utf8', flag:'r'
+  })
   // Run html page through all of the guides
-  const root = applyGuide('./static/index.html')
+  const sentimentGuide = findSentimentGuide({
+    lang: 'en',
+    steps: [
+      [retextSentiment, {}]
+    ]
+  })
+  const root = await sentimentGuide(text)
   const body = root.children[1].children[1]
   body.tagName = "div"
 

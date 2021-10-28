@@ -1,16 +1,16 @@
 {
   "name": "time-hostess",
-  "version": "1.0.0-alpha.3.0",
+  "version": "1.0.0-alpha.4.0",
   "private": true,
   "scripts": {
     "build": "next build",
     "start": "next start -p 3000",
-    "dev": "NODE_OPTIONS='--inspect=8888' next dev",
-    "test": "node --experimental-vm-modules node_modules/jest/bin/jest.js"
+    "dev": "NODE_OPTIONS='--inspect=8888' next dev"
   },
   "dependencies": {
     "dotenv": "^10.0.0",
-    "hot-cold-guide": "^1.0.0-alpha.5.0",
+    "hot-cold-guide": "^1.0.0-alpha.6.0",
+    "hot-cold-retext": "^1.0.0-alpha.2.0",
     "next": "^12.0.1",
     "react": "17.0.2",
     "react-dom": "17.0.2"

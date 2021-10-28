@@ -1,5 +1,7 @@
 import React, { useState } from 'react'
-import { hastToReact } from 'hot-cold-guide'
+import {
+  hastToReact
+} from 'hot-cold-guide/lib/toReact'
 import {
   GuideElement
 } from './guide'
