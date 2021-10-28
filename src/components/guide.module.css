@@ -1,3 +1,7 @@
+.topic {
+  width: fit-content;
+}
+
 /* https://colorbrewer2.org/?type=diverging&scheme=RdBu&n=7 */
 .hot {
   color: red;

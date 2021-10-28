@@ -1,6 +1,0 @@
-{
-  "extends": "next",
-  "env": {
-      "jest": true
-  }
-}

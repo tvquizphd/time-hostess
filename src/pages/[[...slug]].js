@@ -1,5 +1,4 @@
 import { applyGuide } from '../../lib/guide'
-import withApollo from '../../lib/withApollo'
 import Page from '../components/page'
 import process from 'process'
 import dotenv from 'dotenv'
@@ -85,7 +84,6 @@ export const getStaticProps = async (context) => {
       `Cannot load .env at ${error.path}`
     )
 	}
-	console.log(`Loaded .env`)
 	const { SECRET } = process.env
 
   // Run html page through all of the guides
@@ -111,5 +109,4 @@ const Index = (props) => {
   return <Component {...props}/>
 }
 
-// ssr: false, instead ssg + preval + isr
-export default withApollo({ ssr: false })(Index)
+export default Index

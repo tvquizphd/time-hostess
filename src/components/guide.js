@@ -14,17 +14,24 @@ const valueToColor = (range, value) => {
     'none',
     'warm', 'warmer', 'warmest'
   ]
-  const offset = value - range.min
-  const fraction = offset / (range.max - range.min)
-  const colorIndex = Math.floor(fraction * colors.length)
-  return colors[Math.max(0,Math.min(colors.length, colorIndex))]
+  const maxColorIndex = colors.length - 1;
+  const fraction = (value - range.min) / (range.max - range.min)
+  const colorIndex = Math.floor(fraction * maxColorIndex)
+  return colors[Math.max(0,Math.min(maxColorIndex, colorIndex))]
+}
+
+const tagToClasses = (TagName) => {
+  if (TagName.length == 2 && TagName[0] == 'h') {
+    return ['topic']
+  }
+  return []
 }
 
 const getConfig = () => {
   const key = 'sentiment'
   const range = {
-    min: -3,
-    max: 3
+    min: -1,
+    max: 1
   }
   return {key, range}
 }
@@ -40,7 +47,10 @@ export const GuideElement = (TagName) => {
 
     const {key, range} = getConfig()
     const keyData = extractGuidance(props.node, key)
-    const divStyle = styles[valueToColor(range, keyData)]
+    const divStyle = [
+      styles[valueToColor(range, keyData)],
+      ...tagToClasses(TagName).map(str => styles[str])
+    ].join(' ')
 
     return (
       <TagName className={divStyle} {...noNode(props)}>

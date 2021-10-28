@@ -1,52 +1,34 @@
 import React, { useState } from 'react'
-import { useQuery } from "@apollo/client"
 import { hastToReact } from 'hot-cold-guide'
-import { getFeeling } from '../../lib/queries'
-import Happiness from './happiness'
 import {
   GuideElement
 } from './guide'
 
+const HTML5_TAGS = [
+  'abbr', 'address', 'area', 'article', 'aside', 'audio', 'b', 'base',
+  'bdi', 'bdo', 'blockquote', 'body', 'br', 'button', 'canvas', 'caption',
+  'cite', 'code', 'col', 'colgroup', 'datalist', 'dd', 'del', 'details',
+  'dfn', 'div', 'dl', 'dt', 'em', 'embed', 'fieldset', 'figcaption',
+  'figure', 'footer', 'form', 'h1', 'h2', 'h3', 'h4', 'h5', 'h6', 'head',
+  'header', 'hgroup', 'hr', 'html', 'i', 'iframe', 'img', 'input', 'ins',
+  'kbd', 'keygen', 'label', 'legend', 'li', 'link', 'map', 'mark', 'menu',
+  'meta', 'meter', 'nav', 'noscript', 'object', 'ol', 'optgroup', 'option',
+  'output', 'p', 'param', 'pre', 'progress', 'q', 'rp', 'rt', 'ruby',
+  'samp', 'script', 'section', 'select', 'small', 'source', 'span',
+  'strong', 'style', 'sub', 'summary', 'sup', 'table', 'tbody', 'td',
+  'textarea', 'tfoot', 'th', 'thead', 'time', 'title', 'tr', 'track',
+  'ul', 'var', 'video', 'wbr'
+]
+
 const Page = (props) => {
 
-  const [inputText, setInputText] = useState('Welcome')
-
-  const { loading, error, data } = useQuery(getFeeling, {
-		variables: { text: inputText },
-		notifyOnNetworkStatusChange: true
-	});
-
   const content = hastToReact(props.body, {
-    components: {
-      a: GuideElement('a'),
-      p: GuideElement('p'),
-      h1: GuideElement('h1'),
-      h2: GuideElement('h2'),
-      h3: GuideElement('h3'),
-      h4: GuideElement('h4'),
-      h5: GuideElement('h5'),
-      h6: GuideElement('h6'),
-      div: GuideElement('div'),
-      span: GuideElement('span')
-    }
+    components: Object.fromEntries(HTML5_TAGS.map(tag => {
+      return [tag, GuideElement(tag)]
+    }))
   })
   return (
     <div>
-      <div>
-      Secret: {props.SECRET || 'SECRET'}
-      </div>
-      <div>
-        <Happiness
-          data={data}
-          error={error}
-        />
-        {loading? '(loading)' : ''}
-      </div>
-      <div>
-        <textarea value={inputText}
-          onChange={e => setInputText(e.target.value)}
-        />
-      </div>
       {content}
     </div>
   )

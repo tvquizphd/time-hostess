@@ -1,33 +1,19 @@
 {
   "name": "time-hostess",
-  "version": "1.0.0-alpha.2",
+  "version": "1.0.0-alpha.3.0",
   "private": true,
   "scripts": {
     "build": "next build",
     "start": "next start -p 3000",
     "dev": "NODE_OPTIONS='--inspect=8888' next dev",
-    "test": "jest"
+    "test": "node --experimental-vm-modules node_modules/jest/bin/jest.js"
   },
   "dependencies": {
-    "@apollo/client": "^3.4.5",
-    "apollo-server-core": "^3.1.2",
-    "apollo-server-micro": "^3.1.2",
-    "cross-fetch": "^3.1.4",
     "dotenv": "^10.0.0",
-    "graphql": "^15.5.1",
-    "hot-cold-guide": "^1.0.0-alpha.4.2",
-    "micro": "^9.3.4",
-    "next": "11.0.1",
-    "next-apollo": "^5.0.6",
-    "next-plugin-preval": "^1.2.1",
-    "react": "17.0.1",
-    "react-dom": "17.0.1"
+    "hot-cold-guide": "^1.0.0-alpha.5.0",
+    "next": "^12.0.1",
+    "react": "17.0.2",
+    "react-dom": "17.0.2"
   },
-  "devDependencies": {
-    "babel-jest": "^26.6.3",
-    "eslint": "^7.32.0",
-    "eslint-config-next": "^11.0.1",
-    "identity-obj-proxy": "^3.0.0",
-    "jest": "^26.6.3"
-  }
+  "devDependencies": {}
 }
