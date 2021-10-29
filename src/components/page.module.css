@@ -44,20 +44,20 @@
 	border-radius: 50%;
 	border: none;
 	height: 20px;
-	width: 20px;
+	width: 33%;
 }
 .rangeContainer input[type=range]::-moz-range-thumb {
   transform: translateY(-2px);
 	border-radius: 50%;
 	border: none;
 	height: 20px;
-	width: 20px;
+	width: 33%;
 }
 .rangeContainer input[type=range]::-ms-thumb {
   transform: translateY(-2px);
 	border-radius: 50%;
 	height: 20px;
-	width: 20px;
+	width: 33%;
 }
 .optimist {
 	background-color: rgb(254,224,182);
