@@ -33,6 +33,9 @@
 }
 .rangeContainer input[type=range]{
   -webkit-appearance: none;
+  padding-bottom: 1em;
+  padding-top: 1em;
+  margin-top: -1em;
   background: none;
 }
 .rangeContainer input[type=range]::-webkit-slider-thumb {
