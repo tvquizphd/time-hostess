@@ -26,12 +26,8 @@ const HTML5_TAGS = [
 const InputRange = (props) => {
   const step = 0.05
   const bigStep = 0.2
-  const { maxBounds } = props
-	const sign = {
-		min: -1,
-		max: +1
-	}[props.scope]
-  const absValue = sign * props.range[props.scope]
+  const { inputValue } = props
+  const { bounds } = props
   const className = styles[props.cls]
   return (
     <div>
@@ -39,24 +35,23 @@ const InputRange = (props) => {
 			<div className={[styles.rangeContainer, className].join(' ')}>
 				<button className={`${styles.round} ${styles.down}`}
           onClick={() => {
-						props.setRangeKey(props.scope, sign * (absValue - bigStep))
+						props.valueSetter(inputValue - bigStep)
           }}>
           -
         </button>
 				<input 
 					type="range" 
-					min={maxBounds.min + step}
-					max={maxBounds.max}
-					value={absValue} 
+					min={bounds.min + step}
+					max={bounds.max}
+					value={inputValue} 
 					onChange={(event) => {
 						const {value} = event.target
-            const signedValue = sign * value
-						props.setRangeKey(props.scope, signedValue)
+						props.valueSetter(value)
 					}}
 					step={step}/>
 				<button className={`${styles.round} ${styles.up}`}
           onClick={() => {
-						props.setRangeKey(props.scope, sign * (absValue + bigStep))
+						props.valueSetter(inputValue + bigStep)
           }}>
           +
         </button>
@@ -69,48 +64,62 @@ const clamp = ({min, max}, value) => {
   return Math.max(min, Math.min(max, value))
 }
 
+const fromGain = (bounds, sign, absValue) => {
+  return sign * (bounds.max - absValue);
+}
+const toGain = (bounds, sign, value) => {
+  return bounds.max - (sign * value);
+}
+
+const makeRangeSetter = ({sign, bounds, setRange}) => {
+  return (absValue) => {
+    const clampedValue = clamp(bounds, absValue)
+    const value = fromGain(bounds, sign, clampedValue)
+    setRange(value)
+  }
+}
+
 const Page = (props) => {
 
   const key = 'sentiment'
-  const maxBounds = {
+  const bounds = {
     min: 0,
     max: 1
   }
-  const [range, setRange] = useState({
-    min: -0.5,
-    max: 0.5
-  })
-  const setRangeKey = (key, value) => {
-    const sign = value >= 0 ? +1 : -1
-    if (sign * range[key] < 0) {
-      return
-    }
-    const clamped = clamp(maxBounds, sign * value)
-    setRange({...range, [key]: sign * clamped})
-  }
+  const [rangeMin, setRangeMin] = useState(-0.5)
+  const [rangeMax, setRangeMax] = useState(0.5)
   // Generate all content from hast
   const content = hastToReact(props.body, {
     components: Object.fromEntries(HTML5_TAGS.map(tag => {
       return [
         tag,
         GuideElement(tag, {
-          key, range
+          key, range: {
+            min: rangeMin,
+            max: rangeMax
+          }
         })
       ]
     }))
   })
+  const minGain = toGain(bounds, -1, rangeMin)
+  const maxGain = toGain(bounds, +1, rangeMax)
   return (
     <div className={styles.mainContainer}>
 			<div className={styles.controlContainer}>
-				<InputRange scope="min" cls="optimist"
-					label="Optimism" maxBounds={maxBounds}
-					setRangeKey={setRangeKey}
-					range={range}
+				<InputRange cls="optimist"
+					label="Optimism" bounds={bounds}
+					valueSetter={makeRangeSetter({
+            sign: +1, setRange: setRangeMax, bounds
+          })}
+					inputValue={maxGain}
 				/> 
-				<InputRange scope="max" cls="pessimist"
-					label="Pessimism" maxBounds={maxBounds}
-					setRangeKey={setRangeKey}
-					range={range}
+				<InputRange cls="pessimist"
+					label="Pessimism" bounds={bounds}
+					valueSetter={makeRangeSetter({
+            sign: -1, setRange: setRangeMin, bounds
+          })}
+          inputValue={minGain}
 				/> 
 			</div>
       <div className={styles.contentContainer}>
