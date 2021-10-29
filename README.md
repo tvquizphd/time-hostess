@@ -24,6 +24,15 @@ yarn dev
 On a local machine, ssh tunnel into the debugger
 ssh -nNT -L 8888:localhost:8888 root@time-hostess.com
 
+## Build to static files
+
+```
+yarn out
+VERSION=$(node -pe "require('./package.json')['version']")
+OUTPUT=time-hostess-$VERSION
+PREFIX=~/time-hostess-builds
+cp -a ./out/. $PREFIX/$OUTPUT/
+```
 
 ## Run production server
 

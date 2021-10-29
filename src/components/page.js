@@ -25,44 +25,68 @@ const HTML5_TAGS = [
 ]
 const InputRange = (props) => {
   const step = 0.05
-  const bounds = {
-		min: 0.1,
-		max: 1,
-  }
+  const bigStep = 0.2
+  const { maxBounds } = props
 	const sign = {
 		min: -1,
 		max: +1
 	}[props.scope]
+  const absValue = sign * props.range[props.scope]
+  const className = styles[props.cls]
   return (
     <div>
-			<div>{props.label}:</div>
-			<div className={[styles.range, styles[props.cls]].join(' ')}>
-				<span>-</span>
+			<div>{props.label}</div>
+			<div className={[styles.rangeContainer, className].join(' ')}>
+				<button className={`${styles.round} ${styles.down}`}
+          onClick={() => {
+						props.setRangeKey(props.scope, sign * (absValue - bigStep))
+          }}>
+          -
+        </button>
 				<input 
 					type="range" 
-					min={bounds.min}
-					max={bounds.max}
-					value={sign * props.range[props.scope]} 
+					min={maxBounds.min + step}
+					max={maxBounds.max}
+					value={absValue} 
 					onChange={(event) => {
 						const {value} = event.target
-						props.setRangeKey(props.scope, sign * value)
+            const signedValue = sign * value
+						props.setRangeKey(props.scope, signedValue)
 					}}
 					step={step}/>
-				<span>+</span>
+				<button className={`${styles.round} ${styles.up}`}
+          onClick={() => {
+						props.setRangeKey(props.scope, sign * (absValue + bigStep))
+          }}>
+          +
+        </button>
 			</div>
     </div>
   )
 }
 
+const clamp = ({min, max}, value) => {
+  return Math.max(min, Math.min(max, value))
+}
+
 const Page = (props) => {
 
   const key = 'sentiment'
+  const maxBounds = {
+    min: 0,
+    max: 1
+  }
   const [range, setRange] = useState({
     min: -0.5,
     max: 0.5
   })
   const setRangeKey = (key, value) => {
-    setRange({...range, [key]: value})
+    const sign = value >= 0 ? +1 : -1
+    if (sign * range[key] < 0) {
+      return
+    }
+    const clamped = clamp(maxBounds, sign * value)
+    setRange({...range, [key]: sign * clamped})
   }
   // Generate all content from hast
   const content = hastToReact(props.body, {
@@ -76,23 +100,23 @@ const Page = (props) => {
     }))
   })
   return (
-    <>
-			<div className={styles.rangeContainer}>
-				<InputRange scope="min" cls="hot"
-					label="Optimism"
+    <div className={styles.mainContainer}>
+			<div className={styles.controlContainer}>
+				<InputRange scope="min" cls="optimist"
+					label="Optimism" maxBounds={maxBounds}
 					setRangeKey={setRangeKey}
 					range={range}
 				/> 
-				<InputRange scope="max" cls="cold"
-					label="Pessimism"
+				<InputRange scope="max" cls="pessimist"
+					label="Pessimism" maxBounds={maxBounds}
 					setRangeKey={setRangeKey}
 					range={range}
 				/> 
 			</div>
-      <div className={styles.content}>
+      <div className={styles.contentContainer}>
         {content}
       </div>
-    </>
+    </div>
   )
 }
 
