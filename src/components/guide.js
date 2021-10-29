@@ -27,25 +27,16 @@ const tagToClasses = (TagName) => {
   return []
 }
 
-const getConfig = () => {
-  const key = 'sentiment'
-  const range = {
-    min: -1,
-    max: 1
-  }
-  return {key, range}
-}
-
 const noNode = (props) => {
   const {node, ...otherProps} = props;
   return otherProps;
 }
 
-export const GuideElement = (TagName) => {
+export const GuideElement = (TagName, options) => {
+  const {key, range} = options
   // A component that styles arbitarty tags
   return (props) => {
 
-    const {key, range} = getConfig()
     const keyData = extractGuidance(props.node, key)
     const divStyle = [
       styles[valueToColor(range, keyData)],

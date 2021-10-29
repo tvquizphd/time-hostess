@@ -1,0 +1,61 @@
+.content {
+  line-height: 1.8em;
+	display: inline-block;
+}
+.content * {
+	padding: 0.4em;
+}
+/* Range sliders */
+.rangeContainer {
+	display: grid;
+	row-gap: 0.5em;
+	column-gap: 3em;
+	margin: 0.25em 1em;
+	grid-template-columns: repeat(auto-fill, 200px);
+}
+.range {
+	display: grid;
+	grid-template-columns: auto minmax(auto, 3fr) auto;
+}
+.range input[type=range]{
+	height: 2em;
+	border-radius: 50%;
+  -webkit-appearance: none;
+	background: rgb(194, 147, 141);
+}
+.range input[type=range]::-webkit-slider-thumb {
+	-webkit-appearance: none;
+	border: none;
+	height: 16px;
+	width: 16px;
+	border-radius: 50%;
+}
+
+.hot input[type=range]{
+	background: rgb(254,224,182);
+}
+
+/* Range slider colors */
+.hot input[type="range"]::-webkit-slider-thumb {
+  background: rgb(179,88,6);
+}
+.hot input[type="range"]::-moz-range-thumb {
+  background: rgb(179,88,6);
+}
+.hot input[type="range"]::-ms-thumb {
+  background: rgb(179,88,6);
+}
+
+.cold input[type=range]{
+	background: rgb(216,218,235);
+}
+
+.cold input[type="range"]::-webkit-slider-thumb {
+  background: rgb(84,39,136);
+}
+.cold input[type="range"]::-moz-range-thumb {
+  background: rgb(84,39,136);
+}
+.cold input[type="range"]::-ms-thumb {
+  background: rgb(84,39,136);
+}

@@ -3,6 +3,10 @@ import { useRouter } from 'next/router'
 import Page from '../components/page'
 import process from 'process'
 import dotenv from 'dotenv'
+// internationalization
+import { 
+	cutI18nPaths, getI18nPaths
+} from '../lib/getI18nPaths'
 // Use filesystem only in getStaticProps
 import fs from 'fs'
 import {
@@ -29,7 +33,10 @@ const switchFirst = (slug) => {
   }
 }
 
-const switchRoot = (slug) => {
+const switchRoot = (_slug) => {
+
+	const {slug, locale}  = cutI18nPaths(_slug)
+
   switch(slug.length) {
     case 0:
       return Page
@@ -45,16 +52,10 @@ const switchRoot = (slug) => {
 export const getStaticPaths = () => {
   return {
     paths: [
-      {
-        params: { slug: [] },
-        locale: 'en-US',
-      },
-      {
-        params: { slug: ['tree'] },
-        locale: 'en-US',
-      }
+      ...getI18nPaths({ slug: [] }),
+      ...getI18nPaths({ slug: ['tree'] })
     ],
-    fallback: "blocking"
+    fallback: false
   }
 }
 
