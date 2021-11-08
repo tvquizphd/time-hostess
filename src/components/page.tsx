@@ -3,7 +3,7 @@ import styles from './page.module.css';
 
 import {
   hastToReact
-} from 'hot-cold-guide/lib/toReact'
+} from 'hot-cold-guide'
 import {
   GuideElement
 } from './guide'

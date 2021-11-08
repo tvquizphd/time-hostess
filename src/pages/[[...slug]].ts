@@ -1,61 +1,23 @@
+import React from 'react'
 import { select } from 'unist-util-select'
-import { findSentimentGuide } from '../lib/guide'
 import { useRouter } from 'next/router'
-import Page from '../components/page'
+import { switchRoot } from '../lib/switchRoot'
 import process from 'process'
 import path from 'path'
 // internationalization
 import { 
-  cutI18nPaths, getI18nPaths
+  getI18nPaths
 } from '../lib/getI18nPaths'
 // Use filesystem only in getStaticProps
+import { findSentimentGuide } from '../lib/guide'
 import dotenv from 'dotenv'
 import fs from 'fs'
-import {
-  retextSentiment
-} from 'hot-cold-retext'
-
-function staticRegenerationError(message) {
-  this.message = message
-  this.name = 'staticRegenerationError'
-}
-
-const impossibleRouteMessage = (slug) => {
-  return `No route possible for /${slug.join('/')}`
-}
-
-const switchFirst = (slug) => {
-  switch(slug[0]) {
-    case 'test':
-      return Page
-    default:
-      throw new staticRegenerationError(
-        impossibleRouteMessage(slug)
-      )
-  }
-}
-
-const switchRoot = (_slug) => {
-
-  const {slug, locale}  = cutI18nPaths(_slug)
-
-  switch(slug.length) {
-    case 0:
-      return Page
-    case 1:
-      return switchFirst(slug)
-    default:
-      throw new staticRegenerationError(
-        impossibleRouteMessage(slug)
-      )
-  }
-}
 
 export const getStaticPaths = () => {
   return {
     paths: [
-      ...getI18nPaths({ slug: [] }),
-      ...getI18nPaths({ slug: ['test'] })
+      ...getI18nPaths({ publicSlug: [] }),
+      ...getI18nPaths({ publicSlug: ['test'] })
     ],
     fallback: false
   }
@@ -72,11 +34,12 @@ export const getStaticProps = async (context) => {
 
   const revalidate = 60
   const { locale, params } = context
-  const slug = params.slug || []
+  const publicContent = ['public', 'content']
+  const publicSlug = params.publicSlug || []
 
   // Handle ISR of invalid pages
   try {
-    switchRoot(slug)
+    switchRoot(publicSlug)
   }
   catch {
     return {
@@ -95,18 +58,14 @@ export const getStaticProps = async (context) => {
   const { SECRET } = process.env
 
   const filePath = path.join(
-    './public/', ...slug, 'index.html'
+    ...publicContent, ...publicSlug, 'index.html'
   )
   const text = fs.readFileSync(filePath, {
     encoding:'utf8', flag:'r'
   })
+  const lang = 'en'
   // Run html page through all of the guides
-  const sentimentGuide = findSentimentGuide({
-    lang: 'en',
-    steps: [
-			[retextSentiment, {}]
-    ]
-  })
+  const sentimentGuide = findSentimentGuide({lang})
   const root = await sentimentGuide(text)
   const body = select('[tagName=body]', root)
   body.tagName = "div"
@@ -122,11 +81,11 @@ export const getStaticProps = async (context) => {
 
 const Index = (props) => {
   const router = useRouter()
-  const slug = router.query.slug || []
+  const publicSlug = router.query.publicSlug || []
 
   // Render any component given by switchRoot
-  const Component = switchRoot(slug)
-  return <Component {...props}/>
+  const Component = switchRoot(publicSlug)
+  return React.createElement(Component, props)
 }
 
 export default Index

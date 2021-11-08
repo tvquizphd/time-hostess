@@ -32,7 +32,7 @@ const noNode = (props) => {
   return otherProps;
 }
 
-export const GuideElement = (TagName, options) => {
+const GuideElement = (TagName, options) => {
   const {key, range} = options
   // A component that styles arbitarty tags
   return (props) => {
@@ -49,4 +49,8 @@ export const GuideElement = (TagName, options) => {
       </TagName>
     )
   }
+}
+
+export {
+  GuideElement
 }

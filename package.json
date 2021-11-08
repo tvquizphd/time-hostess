@@ -7,20 +7,24 @@
     "export": "next export",
     "start": "next start -p 3000",
     "dev": "next dev",
+    "lint": "next lint",
     "dev:inspect": "NODE_OPTIONS='--inspect=8888' next dev",
-    "copyExport": "node --experimental-json-modules --experimental-vm-modules ./src/cli/copyExport.mjs",
-    "out": "yarn build && yarn export && yarn copyExport"
+    "copy": "node --experimental-json-modules --experimental-vm-modules ./src/cli/copyExport.mjs",
+    "out": "yarn build && yarn export && yarn copy"
   },
   "dependencies": {
     "dotenv": "^10.0.0",
-    "hot-cold-guide": "^1.0.0-alpha.7.0",
-    "hot-cold-retext": "^1.0.0-alpha.2.0",
+    "hot-cold-guide": "^1.0.0-alpha.8.1",
+    "hot-cold-retext": "^1.0.0-alpha.3.0",
     "next": "^12.0.1",
     "react": "17.0.2",
     "react-dom": "17.0.2",
     "unist-util-select": "^4.0.0"
   },
   "devDependencies": {
-    "fs-extra": "^10.0.0"
+    "eslint": "<8.0.0",
+    "eslint-config-next": "12.0.2",
+    "fs-extra": "^10.0.0",
+    "typescript": "^4.4.4"
   }
 }
