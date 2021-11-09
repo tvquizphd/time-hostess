@@ -2405,10 +2405,10 @@ hmac-drbg@^1.0.1:
     minimalistic-assert "^1.0.0"
     minimalistic-crypto-utils "^1.0.1"
 
-hot-cold-guide@^1.0.0-alpha.8.1:
-  version "1.0.0-alpha.8.1"
-  resolved "https://registry.yarnpkg.com/hot-cold-guide/-/hot-cold-guide-1.0.0-alpha.8.1.tgz#2026d19c12bc39c4c232fb195125a61e471e08bc"
-  integrity sha512-E2QbhhFl2raatYEItqiUCsCplwCGJOmeZunv1xjxXDppzPSzxF6KPAr6oo7Xc/sbu8aPHnMbPIuDe+DTQO1kBg==
+hot-cold-guide@^1.0.0-alpha.8.2:
+  version "1.0.0-alpha.8.2"
+  resolved "https://registry.yarnpkg.com/hot-cold-guide/-/hot-cold-guide-1.0.0-alpha.8.2.tgz#dc25597ed8713f5f8b46328dfb386a866201c7e5"
+  integrity sha512-7S806VyfuZdXn4FzE+ucCa47hQCrOwweryc39oeuyvRYoKOnZQEd5J1FX9Ns48b1BqM80xnciIOO+Wc7PNOgdQ==
   dependencies:
     react "^17.0.2"
     rehype "^12.0.0"
@@ -2418,6 +2418,7 @@ hot-cold-guide@^1.0.0-alpha.8.1:
     retext-english "^4.1.0"
     unified "^10.1.0"
     unist-util-filter "^4.0.0"
+    unist-util-map "^3.0.0"
     unist-util-remove-position "^4.0.1"
     unist-util-select "^4.0.0"
     unist-util-visit "^4.1.0"
@@ -4131,6 +4132,13 @@ unist-util-is@^5.0.0:
   version "5.1.1"
   resolved "https://registry.yarnpkg.com/unist-util-is/-/unist-util-is-5.1.1.tgz#e8aece0b102fa9bc097b0fef8f870c496d4a6236"
   integrity sha512-F5CZ68eYzuSvJjGhCLPL3cYx45IxkqXSetCcRgUXtbcm50X2L9oOWQlfUfDdAf+6Pd27YDblBfdtmsThXmwpbQ==
+
+unist-util-map@^3.0.0:
+  version "3.0.0"
+  resolved "https://registry.yarnpkg.com/unist-util-map/-/unist-util-map-3.0.0.tgz#ec4c3e4f3f65f559b6c232087af2a470f3e5db89"
+  integrity sha512-kyPbOAlOPZpytdyquF1g6qYpAjkpMpSPtR7TAj4SOQWSJfQ/LN+IFI2oWBvkxzhsPKxiMKZcgpp5ihZLLvNl6g==
+  dependencies:
+    "@types/unist" "^2.0.0"
 
 unist-util-modify-children@^2.0.0:
   version "2.0.0"
