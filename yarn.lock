@@ -2405,10 +2405,10 @@ hmac-drbg@^1.0.1:
     minimalistic-assert "^1.0.0"
     minimalistic-crypto-utils "^1.0.1"
 
-hot-cold-guide@^1.0.0-alpha.8.3:
-  version "1.0.0-alpha.8.3"
-  resolved "https://registry.yarnpkg.com/hot-cold-guide/-/hot-cold-guide-1.0.0-alpha.8.3.tgz#eac93148244f7fd6df658b82d879ab1d5023b155"
-  integrity sha512-ijZv2EqLpdBWskHONr3g2d2zDM6VrG9vVHCjaT2iYQM0eBE62SZ7b/ZqlgKqQ/2TzffrNS1N8AvzXKt5GbWd0A==
+hot-cold-guide@^1.0.0-alpha.8.4:
+  version "1.0.0-alpha.8.4"
+  resolved "https://registry.yarnpkg.com/hot-cold-guide/-/hot-cold-guide-1.0.0-alpha.8.4.tgz#7ae1bc182269cdaa9b3cb18489a00d6110df3b73"
+  integrity sha512-05OkP/lnN2lEI4GomtWaafxIPnLVCTP8aHFe1NgE7hKOfkjKEa9wC7k4s07hCIRxV0OhXDTcMpUgdCP5DbwpvQ==
   dependencies:
     react "^17.0.2"
     rehype "^12.0.0"
@@ -2425,11 +2425,14 @@ hot-cold-guide@^1.0.0-alpha.8.3:
     unist-util-visit "^4.1.0"
     vfile "^5.1.1"
 
-hot-cold-retext@^1.0.0-alpha.3.1:
-  version "1.0.0-alpha.3.1"
-  resolved "https://registry.yarnpkg.com/hot-cold-retext/-/hot-cold-retext-1.0.0-alpha.3.1.tgz#e48c5cbe7cb745044c9cc670322d2501b1ac59b7"
-  integrity sha512-XZpz25ionQMSOau0muvY749u+cIrSY8DYbGWUpqVpW1ugGh1WMUV9BHnjsRsWVR2DJB3pRVpwFUw8RsfrAbDmg==
+hot-cold-retext@^1.0.0-alpha.3.4:
+  version "1.0.0-alpha.3.4"
+  resolved "https://registry.yarnpkg.com/hot-cold-retext/-/hot-cold-retext-1.0.0-alpha.3.4.tgz#17f4c73d211c84c2234d6f723f2b85e53f679ed1"
+  integrity sha512-JHBpkv4NVxJ+9V9yqv8W4sveC3KlKMVvRMCYxDn/b3LaWe/2xkM/OJu+InlU/K0JPGRmCFdwLf6MFpUXrnwofQ==
   dependencies:
+    "@nlpjs/core" "^4.22.0"
+    "@nlpjs/lang-en" "^4.22.0"
+    "@nlpjs/nlu" "^4.22.0"
     nlcst-to-string "^3.1.0"
     node-nlp "^4.22.1"
     tree-guards "^1.0.0-alpha.1.0"
