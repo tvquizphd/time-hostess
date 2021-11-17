@@ -1,11 +1,16 @@
 import React from 'react'
-import styles from './guide.module.css';
+import styles from './guide.module.css'
+import {takeWeightedMean} from 'hot-cold-guide'
 
-const extractGuidance = (node, key) => {
-  const keyData = node?.data?.textData[key] || {
-    mean: 0
-  }
-  return keyData.mean
+const extractGuidance = ({node, metric, weighKey, keys}) => {
+  const resultList = keys.map((key) => {
+    return {
+      [metric]: 0,
+      __w: weighKey(key),
+      ...node?.data?.textData[key.value]
+    }
+  })
+  return takeWeightedMean(resultList, metric, '__w').mean
 }
 
 const valueToColor = (range, value) => {
@@ -33,11 +38,11 @@ const noNode = (props) => {
 }
 
 const GuideElement = (TagName, options) => {
-  const {key, range} = options
+  const {range} = options
   // A component that styles arbitarty tags
   return (props) => {
-
-    const keyData = extractGuidance(props.node, key)
+    const {node} = props
+    const keyData = extractGuidance({...options, node})
     const divStyle = [
       styles[valueToColor(range, keyData)],
       ...tagToClasses(TagName).map(str => styles[str])

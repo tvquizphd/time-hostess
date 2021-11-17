@@ -25,70 +25,20 @@
   position: sticky;
   top: 0;
 }
-.rangeContainer {
-	display: grid;
-	height: 1em;
-	border-radius: 50%;
-	grid-template-columns: auto minmax(auto, 3fr) auto;
-}
-.rangeContainer input[type=range]{
-  -webkit-appearance: none;
-  padding-bottom: 1em;
-  padding-top: 1em;
-  margin-top: -1em;
-  background: none;
-}
-.rangeContainer input[type=range]::-webkit-slider-thumb {
-	-webkit-appearance: none;
-  transform: translateY(-2px);
-	border-radius: 50%;
-	border: none;
-	height: 20px;
-	width: 33%;
-}
-.rangeContainer input[type=range]::-moz-range-thumb {
-  transform: translateY(-2px);
-	border-radius: 50%;
-	border: none;
-	height: 20px;
-	width: 33%;
-}
-.rangeContainer input[type=range]::-ms-thumb {
-  transform: translateY(-2px);
-	border-radius: 50%;
-	height: 20px;
-	width: 33%;
-}
 .optimist {
 	background-color: rgb(254,224,182);
 }
 .pessimist {
 	background-color: rgb(216,218,235);
 }
-.optimist .up {
+.optimistButton {
 	color: rgb(240, 240, 240);
   background-color: rgb(179,88,6);
 }
-.pessimist .up {
+.pessimistButton {
 	color: rgb(240, 240, 240);
   background-color: rgb(84,39,136);
 }
-.down {
-  background-color: rgb(247,247,247);
-}
-.round {
-	border-radius: 50%;
-  font-size: 1.2em;
-  display: flex;
-  align-items: center; 
-  justify-content: center;
-  transform: translateY(-6px);
-  padding: 0px;
-	border: none;
-	height: 28px;
-	width: 28px;
-}
-
 
 /* Range slider colors */
 .optimist input[type="range"]::-webkit-slider-thumb {

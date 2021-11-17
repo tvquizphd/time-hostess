@@ -1,21 +1,28 @@
 import i18nConfig from '../../i18.next.config'
 
-const remapLocale = (locale) => {
+const getShortLocale = (locale) => {
   return {
-    'en-US': 'en'
+    'en-US': 'en',
+    'en-UK': 'en'
   }[locale] || locale
 }
 
+const getPrefix = (locale) => {
+  const {defaultLocale} = i18nConfig.i18n
+  const isDefaultLocale = locale == defaultLocale
+  return isDefaultLocale ? [] : [locale]
+}
+
 const getI18nPaths = (params) => {
-  const {locales, defaultLocale} = i18nConfig.i18n
+  const {locales} = i18nConfig.i18n
   return locales.map((locale) => {
-    const isDefaultLocale = locale == defaultLocale
-    const prefix = isDefaultLocale ? [] : [locale]
+    const prefix = getPrefix(locale)
+    const shortPrefix = getPrefix(getShortLocale(locale))
     return {
       params: {
         ...params,
-        publicSlug: params.publicSlug,
-        slug: prefix.concat(params.publicSlug)
+        slug: prefix.concat(params.slug),
+        shortSlug: shortPrefix.concat(params.slug)
       }
     }
   })

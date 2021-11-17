@@ -1,6 +1,6 @@
 import React from 'react'
-import { select } from 'unist-util-select'
 import { useRouter } from 'next/router'
+import { select } from 'unist-util-select'
 import { switchRoot } from '../lib/switchRoot'
 import process from 'process'
 import path from 'path'
@@ -8,72 +8,87 @@ import path from 'path'
 import { 
   getI18nPaths
 } from '../lib/getI18nPaths'
+import MultiplePersonalityPage from '../components/multiplePersonalityPage'
+import BipolarPage from '../components/bipolarPage'
 // Use filesystem only in getStaticProps
-import { findSentimentGuide } from '../lib/guide'
+import {
+  findGuide,
+  findProps
+} from '../lib/guide'
 import dotenv from 'dotenv'
 import fs from 'fs'
+// Types
+import type {
+  HastParent
+} from 'tree-guards'
+
+function staticRegenerationError(message) {
+  this.message = message
+  this.name = 'staticRegenerationError'
+}
+
+const staticPaths = [
+  ...getI18nPaths({ 
+    page: BipolarPage,
+    propNames: ['keys'],
+    guide: 'sentiment',
+    slug: []
+  }),
+  ...getI18nPaths({
+    page: MultiplePersonalityPage,
+    propNames: ['keys'],
+    guide: 'personas',
+    slug: ['test']
+  })
+]
 
 export const getStaticPaths = () => {
   return {
-    paths: [
-      ...getI18nPaths({ publicSlug: [] }),
-      ...getI18nPaths({ publicSlug: ['test'] })
-    ],
+    paths: staticPaths,
     fallback: false
-  }
-}
-
-const makePropsDefault = (body) => {
-  return {
-    body,
-    SECRET: null
   }
 }
 
 export const getStaticProps = async (context) => {
 
   const revalidate = 60
-  const { locale, params } = context
-  const publicContent = ['public', 'content']
-  const publicSlug = params.publicSlug || []
+  const slug = context.params.slug || []
 
   // Handle ISR of invalid pages
-  try {
-    switchRoot(publicSlug)
-  }
-  catch {
+  const params = switchRoot(staticPaths, slug) || {}
+  const guide = await findGuide(params)
+  if (!guide) {
     return {
       notFound: true,
       revalidate
     }
   }
+  const publicContent = [
+    'public', 'content',
+    ...params.shortSlug, 'index.html'
+  ]
 
   // Load environment
   const {error} = dotenv.config()
   if (error) {
-    throw new staticRegenerationError(
-      `Cannot load .env at ${error.path}`
-    )
+    throw new staticRegenerationError(`Cannot load .env`)
   }
   const { SECRET } = process.env
 
-  const filePath = path.join(
-    ...publicContent, ...publicSlug, 'index.html'
-  )
+  const filePath = path.join(...publicContent)
   const text = fs.readFileSync(filePath, {
     encoding:'utf8', flag:'r'
   })
-  const lang = 'en'
   // Run html page through all of the guides
-  const sentimentGuide = findSentimentGuide({lang})
-  const root = await sentimentGuide(text)
-  const body = select('[tagName=body]', root)
+  const root = await guide(text)
+  const body = select('[tagName=body]', root) as HastParent
   body.tagName = "div"
 
   return {
     props: {
-      ...makePropsDefault(body),
-      SECRET: SECRET || null
+      ...findProps(params),
+      SECRET: SECRET || null,
+      body: body
     },
     revalidate
   }
@@ -81,11 +96,11 @@ export const getStaticProps = async (context) => {
 
 const Index = (props) => {
   const router = useRouter()
-  const publicSlug = router.query.publicSlug || []
+  const slug = router.query.slug || []
 
   // Render any component given by switchRoot
-  const Component = switchRoot(publicSlug)
-  return React.createElement(Component, props)
+  const {page} = switchRoot(staticPaths, slug)
+  return React.createElement(page, props)
 }
 
 export default Index

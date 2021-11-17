@@ -1,0 +1,62 @@
+.mainContainer {
+  display: grid;
+	color: rgb(16, 16, 16);
+  justify-content: center;
+  grid-template-rows: auto 1fr;
+}
+.contentContainer {
+  line-height: 1.7em;
+	display: inline-block;
+  overflow: scroll;
+}
+.contentContainer * {
+	padding: 0.3em;
+}
+/* Range sliders */
+.controlContainer {
+	display: grid;
+	row-gap: 0.1em;
+	column-gap: 0.5em;
+  text-align: center;
+  padding: 0.666em;
+  padding-top: 0.333em;
+  background-color: rgba(252, 220, 230, 0.666);
+	grid-template-columns: repeat(auto-fill, minmax(200px,1fr));
+  position: sticky;
+  top: 0;
+}
+.comedy {
+	background-color: rgb(254,224,182);
+}
+.adivce {
+	background-color: rgb(216,218,235);
+}
+.comedyButton {
+	color: rgb(240, 240, 240);
+  background-color: rgb(179,88,6);
+}
+.adivceButton {
+	color: rgb(240, 240, 240);
+  background-color: rgb(84,39,136);
+}
+
+/* Range slider colors */
+.comedy input[type="range"]::-webkit-slider-thumb {
+  background: rgb(179,88,6);
+}
+.comedy input[type="range"]::-moz-range-thumb {
+  background: rgb(179,88,6);
+}
+.comedy input[type="range"]::-ms-thumb {
+  background: rgb(179,88,6);
+}
+
+.adivce input[type="range"]::-webkit-slider-thumb {
+  background: rgb(84,39,136);
+}
+.adivce input[type="range"]::-moz-range-thumb {
+  background: rgb(84,39,136);
+}
+.adivce input[type="range"]::-ms-thumb {
+  background: rgb(84,39,136);
+}
