@@ -1,4 +1,5 @@
 const findParams = (staticPaths, slug) => {
+  // Find first static path with matching slug
   return staticPaths.find(({params}) => {
     if (slug.length === params.slug.length) {
       return params.slug.every((v,i)=> v === slug[i]);

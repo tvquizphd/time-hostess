@@ -36,7 +36,7 @@ const MultiplePersonalityPage = (props) => {
         <Content {...{
           ...props,
           range: {
-            min: -1,
+            min: 0,
             max: 1
           },
           weighKey

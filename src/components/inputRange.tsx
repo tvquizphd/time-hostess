@@ -35,7 +35,7 @@ const InputRange = (props) => {
 					value={inputValue} 
 					onChange={(event) => {
 						const {value} = event.target
-						valueSetter(value)
+						valueSetter(parseFloat(value))
 					}}
 					step={step}/>
 				<button className={`${styles.round} ${buttonClass}`}

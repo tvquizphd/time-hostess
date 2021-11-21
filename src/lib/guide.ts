@@ -5,6 +5,24 @@ import {
 import fs from 'fs'
 import path from 'path'
 import { findHotColdGuide } from 'hot-cold-guide'
+// Types
+import type {
+  UnaryFn
+} from './util'
+
+export type PropOptions = {
+  guide: string 
+}
+type Key = {
+  root: string | void,
+  domain: string | void,
+  value: string,
+}
+export type FoundProps = {
+  metric: string,
+  keys: Key[]
+}
+type FindProps = UnaryFn<PropOptions, FoundProps>
 
 const readFileSync = (path) => {
   return fs.readFileSync(path, {
@@ -69,37 +87,28 @@ const makeKeywords = (options) => {
 }
 
 const findRoot = ({guide}) => {
-  const rootGuides = ['sentiment']
-  if (rootGuides.includes(guide)) {
-    return guide
-  }
   if (guide in domainLists) {
     return 'classification'
   }
-  return 'unknown'
+  return guide
 }
 
 const findPropsKeys = ({guide}) => {
   const domains = domainLists[guide] || null
   const root = findRoot({guide})
-  return {
-    keys: makeKeys({
-      domains, root
-    })
-  }
+  return makeKeys({
+    domains, root
+  })
 }
 
-const findProps = ({propNames, ...params}) => {
+const findProps: FindProps = (params) => {
   const defaultProps = {
     metric: 'mean'
   }
-  return propNames.reduce((out, name) => {
-    return {...out,
-      ...{
-        keys: findPropsKeys(params)
-      }[name]
-    }
-  }, defaultProps)
+  return {
+    ...defaultProps,
+    keys: findPropsKeys(params)
+  }
 }
 
 const findClassifyGuide = async ({domains}) => {
