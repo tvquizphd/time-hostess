@@ -44,9 +44,9 @@ const domainLists = {
     lang: 'en'
   }, {
     intents: {
+      confucius: readExamples(['advice', 'confucius.txt']),
       laozi: readExamples(['advice', 'laozi.txt']),
-      buddha: readExamples(['advice', 'buddha.txt']),
-      confucius: readExamples(['advice', 'confucius.txt'])
+      buddha: readExamples(['advice', 'buddha.txt'])
     },
     domain: 'advice',
     lang: 'en'

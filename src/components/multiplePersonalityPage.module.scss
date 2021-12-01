@@ -1,0 +1,107 @@
+@use "sass:map";
+
+$light-text: rgb(240,240,240);
+$dark-text: rgb(16,16,16);
+$none: rgb(247,247,247);
+
+$comedy-a: (
+  "warm": rgb(254,224,182),
+  "warmer": rgb(241,163,64),
+  "warmest": rgb(179,88,6),
+);
+
+$advice-a: (
+  "warm": rgb(205,213,229),
+  "warmer": rgb(98,136,208),
+  "warmest": rgb(8,33,81),
+);
+
+$advice-b: (
+  "warm": rgb(207,204,229),
+  "warmer": rgb(142,97,209), 
+  "warmest": rgb(37,7,83),
+);
+
+$advice-c: (
+  "warm": rgb(205,226,228),
+  "warmer": rgb(89,217,153), 
+  "warmest": rgb(0,85,42),
+);
+
+$text-colors: (
+  "warm": $dark-text,
+  "warmer": $dark-text,
+  "warmest": $light-text,
+);
+
+$cats: (
+	"comedy-0": $comedy-a,
+	"advice-1": $advice-a,
+	"advice-2": $advice-b,
+	"advice-3": $advice-c,
+);
+
+@mixin highlight($name, $warmth) {
+	background-color: map.get(map.get($cats, $name), $warmth);
+}
+
+@mixin category-range($name) {
+  .#{$name} input[type="range"]::-webkit-slider-thumb {
+    background: map.get(map.get($cats, $name), "warmer");
+  }
+  .#{$name} input[type="range"]::-moz-range-thumb {
+    background: map.get(map.get($cats, $name), "warmer");
+  }
+  .#{$name} input[type="range"]::-ms-thumb {
+    background: map.get(map.get($cats, $name), "warmer");
+  }
+}
+
+@mixin category($name) {
+  $warmths: "warm", "warmer", "warmest";
+  @each $warmth in $warmths {
+    .#{$name}-#{$warmth} {
+      @include highlight($name, $warmth);
+      color: map.get($text-colors, $warmth);
+    }
+  }
+  @include category-range($name);
+}
+
+.none {
+  color: $dark-text;
+  background-color: $none;
+}
+
+@include category("comedy-0");
+@include category("advice-1");
+@include category("advice-2");
+@include category("advice-3");
+
+.mainContainer {
+  display: grid;
+	color: $dark-text;
+  justify-content: center;
+  grid-template-rows: auto 1fr;
+}
+.contentContainer {
+  line-height: 1.7em;
+	display: inline-block;
+  overflow: scroll;
+}
+.contentContainer * {
+	padding: 0.3em;
+}
+/* Range sliders */
+.controlContainer {
+	display: grid;
+	row-gap: 0.1em;
+	column-gap: 0.5em;
+  text-align: center;
+  padding: 0.666em;
+  padding-top: 0.333em;
+  background-color: rgba(252, 220, 230, 0.666);
+	grid-template-columns: repeat(auto-fill, minmax(200px,1fr));
+  position: sticky;
+  top: 0;
+}

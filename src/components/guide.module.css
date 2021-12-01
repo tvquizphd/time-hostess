@@ -2,33 +2,3 @@
   width: fit-content;
 	margin: .5em 0;
 }
-
-/* https://colorbrewer2.org/?type=diverging&scheme=RdBu&n=7#type=diverging&scheme=PuOr&n=7 */
-.warmest {
-	color: rgb(240, 240, 240);
-  background-color: rgb(179,88,6);
-} 
-.warmer {
-	color: rgb(16, 16, 16);
-  background-color: rgb(241,163,64);
-} 
-.warm {
-	color: rgb(16, 16, 16);
-  background-color: rgb(254,224,182);
-} 
-.none {
-	color: rgb(16, 16, 16);
-  background-color: rgb(247,247,247);
-} 
-.cool {
-	color: rgb(16, 16, 16);
-  background-color: rgb(216,218,235);
-} 
-.cooler {
-	color: rgb(16, 16, 16);
-  background-color: rgb(153,142,195);
-} 
-.coolest {
-	color: rgb(240, 240, 240);
-  background-color: rgb(84,39,136);
-}

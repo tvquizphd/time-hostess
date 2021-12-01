@@ -1,3 +1,56 @@
+@use "sass:map";
+
+$light-text: rgb(240,240,240);
+$dark-text: rgb(16,16,16);
+
+$colors: (
+  "coolest": rgb(37,7,83),
+  "cooler": rgb(142,97,209), 
+  "cool": rgb(207,204,229),
+  "none": rgb(247,247,247),
+  "warm": rgb(254,224,182),
+  "warmer": rgb(241,163,64),
+  "warmest": rgb(179,88,6),
+);
+
+$text-colors: (
+  "coolest": $light-text,
+  "cooler": $dark-text,
+  "cool": $dark-text,
+  "node": $dark-text,
+  "warm": $dark-text,
+  "warmer": $dark-text,
+  "warmest": $light-text,
+);
+
+@mixin highlight($color) {
+	background-color: map.get($colors, $color);
+}
+
+@mixin category-range($color) {
+  .#{$color}-range input[type="range"]::-webkit-slider-thumb {
+    background: map.get($colors, $color);
+  }
+  .#{$color}-range input[type="range"]::-moz-range-thumb {
+    background: map.get($colors, $color);
+  }
+  .#{$color}-range input[type="range"]::-ms-thumb {
+    background: map.get($colors, $color);
+  }
+}
+
+@mixin category($color) {
+  .#{$color} {
+    @include highlight($color);
+    color: map.get($text-colors, $color);
+  }
+  @include category-range($color);
+}
+
+$colorList: "coolest", "cooler", "cool", "none", "warm", "warmer", "warmest";
+@each $color in $colorList {
+  @include category($color)
+}
 .mainContainer {
   display: grid;
 	color: rgb(16, 16, 16);

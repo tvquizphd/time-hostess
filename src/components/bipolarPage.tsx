@@ -1,11 +1,30 @@
 import React, { useState } from 'react'
-import styles from './bipolarPage.module.css'
+import styles from './bipolarPage.module.scss'
 import {
   toDomain,
   makeRangeSetter
 } from '../lib/rangeSetter'
+import {
+  extractGuidance
+} from '../lib/extractor'
+import {
+  selectFromList
+} from '../lib/selectFromList'
+
 import InputRange from './inputRange'
 import Content from './content'
+
+const valueToStyle = (options) => {
+  const {range} = options
+  const value = extractGuidance(options)
+  const colors = [
+    'coolest', 'cooler', 'cool',
+    'none',
+    'warm', 'warmer', 'warmest'
+  ]
+  const color = selectFromList(value, range, colors)
+  return styles[color]
+}
 
 const BipolarPage = (props) => {
 
@@ -16,19 +35,20 @@ const BipolarPage = (props) => {
     <div className={styles.mainContainer}>
 			<div className={styles.controlContainer}>
 				<InputRange {...{
-          cls: ['optimist', 'optimistButton'].map(k=>styles[k]),
-          setter: setRangeMax, value: rangeMax, limit: +1,
+          cls: ['warmer-range', 'warmest'].map(k=>styles[k]),
+          setter: setRangeMax, value: rangeMax, limit: [+1, 0],
           label: "Optimism"
         }}/> 
 				<InputRange {...{
-          cls: ['pessimist', 'pessimistButton'].map(k=>styles[k]),
-          setter: setRangeMin, value: rangeMin, limit: -1,
+          cls: ['cooler-range', 'coolest'].map(k=>styles[k]),
+          setter: setRangeMin, value: rangeMin, limit: [-1, 0],
           label: "Pessimism"
         }}/> 
 			</div>
       <div className={styles.contentContainer}>
         <Content {...{
           ...props,
+          valueToStyle,
           range: {
             min: rangeMin,
             max: rangeMax

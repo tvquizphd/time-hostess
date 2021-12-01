@@ -1,29 +1,5 @@
 import React from 'react'
 import styles from './guide.module.css'
-import {takeWeightedMean} from 'hot-cold-guide'
-
-const extractGuidance = ({node, metric, weighKey, keys}) => {
-  const resultList = keys.map((key) => {
-    return {
-      [metric]: 0,
-      __w: weighKey(key),
-      ...node?.data?.textData[key.value]
-    }
-  })
-  return takeWeightedMean(resultList, metric, '__w').mean
-}
-
-const valueToColor = (range, value) => {
-  const colors = [
-    'coolest', 'cooler', 'cool',
-    'none',
-    'warm', 'warmer', 'warmest'
-  ]
-  const maxColorIndex = colors.length - 1;
-  const fraction = (value - range.min) / (range.max - range.min)
-  const colorIndex = Math.floor(fraction * maxColorIndex)
-  return colors[Math.max(0,Math.min(maxColorIndex, colorIndex))]
-}
 
 const tagToClasses = (TagName) => {
   if (TagName.length == 2 && TagName[0] == 'h') {
@@ -37,19 +13,48 @@ const noNode = (props) => {
   return otherProps;
 }
 
+const isGuideButton = (node) => {
+  const {className} = node?.properties
+  return className?.includes('guide-button')
+}
+
+const isGuideNone = (node) => {
+  const {className} = node?.properties
+  return className?.includes('guide-ignore')
+}
+
+const onClick = (node, clickGuideButton) => {
+  const canClick = isGuideButton(node) && clickGuideButton
+  if (canClick) {
+    return (e) => {
+      clickGuideButton(node)
+    }
+  }
+  return null
+}
+
+
+const styleGuide = (options) => {
+  const {valueToStyle, node} = options
+  return isGuideNone(node) ? '' : valueToStyle(options)
+}
+
 const GuideElement = (TagName, options) => {
-  const {range} = options
+  const {clickGuideButton} = options
   // A component that styles arbitarty tags
   return (props) => {
     const {node} = props
-    const keyData = extractGuidance({...options, node})
     const divStyle = [
-      styles[valueToColor(range, keyData)],
+      styleGuide({...options, node}),
       ...tagToClasses(TagName).map(str => styles[str])
     ].join(' ')
 
     return (
-      <TagName className={divStyle} {...noNode(props)}>
+      <TagName 
+        onClick={onClick(node, clickGuideButton)}
+        className={divStyle}
+        {...noNode(props)}
+      >
         {props.children}
       </TagName>
     )
