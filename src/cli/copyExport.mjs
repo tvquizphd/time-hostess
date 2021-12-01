@@ -1,4 +1,4 @@
-import modulePackage from '../../package.json'
+import modulePackage from '../../package.json' assert {type: "json"}
 import {tmpdir, homedir} from 'os'
 import fs from 'fs-extra'
 import path from 'path'
