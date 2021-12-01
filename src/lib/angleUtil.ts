@@ -8,7 +8,7 @@ import type {
 
 type Angle = number
 type Range = Record<'min' | 'max', number>
-type AngleToRange = Fn<[Angle, Range], number>
+type AngleSimilarity = Fn<[Angle, Angle, Range], number>
 
 const modulo = (v, n) => {
   return ((v % n) + n) % n
@@ -33,7 +33,7 @@ const angleDifference = (a1, a2) =>  {
   return radianToAngle(r3)
 }
 
-const angleSimilarity: AngleToRange = (a1, a2, range) => {
+const angleSimilarity: AngleSimilarity = (a1, a2, range) => {
   const cos = Math.cos(angleDifference(a1, a2))
   return toRange([range.min, range.max], cos)
 }
