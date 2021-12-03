@@ -133,9 +133,9 @@ $maxWidth: 600px;
   padding: 0.3em;
 }
 
-$compassDiameter: 6em;
-$compassBorder: minmax(auto, 6em);
-$compassRow: $compassBorder $compassDiameter $compassBorder;
+$compassDiameter: minmax(6em, 15vw);
+$compassBorder: 1fr;
+$compassRow: 1fr $compassBorder $compassDiameter $compassBorder;
 
 .uiContainer {
   display: grid;
@@ -145,14 +145,14 @@ $compassRow: $compassBorder $compassDiameter $compassBorder;
   bottom: 0;
   position: fixed;
   grid-gap: .333em;
-  padding: 0.666em;
+  padding: 0.333em;
   justify-items: center;
   align-items: center;
   pointer-events: none;
   grid-template: 
-    ". . d ." $compassBorder
+    ". . d ." $compassBorder *.8
     "x c a e" $compassDiameter
-    "x . b ." $compassBorder / 1fr $compassRow;
+    "x . b ." $compassBorder *.8 / $compassRow;
 }
 
 $bookTextColor: $dark-text;
