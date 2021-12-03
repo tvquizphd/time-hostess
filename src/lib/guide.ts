@@ -19,7 +19,6 @@ type Key = {
   value: string,
 }
 export type FoundProps = {
-  metric: string,
   keys: Key[]
 }
 type FindProps = UnaryFn<PropOptions, FoundProps>
@@ -102,11 +101,7 @@ const findPropsKeys = ({guide}) => {
 }
 
 const findProps: FindProps = (params) => {
-  const defaultProps = {
-    metric: 'mean'
-  }
   return {
-    ...defaultProps,
     keys: findPropsKeys(params)
   }
 }

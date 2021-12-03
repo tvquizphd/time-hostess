@@ -1,29 +1,36 @@
 @use "sass:map";
+@use '../lib/center' as center;
 
 $light-text: rgb(240,240,240);
 $dark-text: rgb(16,16,16);
 $none: rgb(247,247,247);
 
-$comedy-a: (
+$other: (
+  "warm": $none,
+  "warmer": $dark-text,
+  "warmest": $dark-text
+);
+
+$comedy-0: (
   "warm": rgb(254,224,182),
   "warmer": rgb(241,163,64),
   "warmest": rgb(179,88,6),
 );
 
-$advice-a: (
-  "warm": rgb(205,213,229),
+$advice-0: (
+  "warm": rgb(200,213,234),
   "warmer": rgb(98,136,208),
   "warmest": rgb(8,33,81),
 );
 
-$advice-b: (
-  "warm": rgb(207,204,229),
+$advice-1: (
+  "warm": rgb(210,200,232),
   "warmer": rgb(142,97,209), 
   "warmest": rgb(37,7,83),
 );
 
-$advice-c: (
-  "warm": rgb(205,226,228),
+$advice-2: (
+  "warm": rgb(200,231,228),
   "warmer": rgb(89,217,153), 
   "warmest": rgb(0,85,42),
 );
@@ -35,17 +42,36 @@ $text-colors: (
 );
 
 $cats: (
-	"comedy-0": $comedy-a,
-	"advice-1": $advice-a,
-	"advice-2": $advice-b,
-	"advice-3": $advice-c,
+  "other": $other,
+  "comedy-0": $comedy-0,
+  "advice-0": $advice-0,
+  "advice-1": $advice-1,
+  "advice-2": $advice-2,
 );
 
+@function categoryColor($name, $warmth) {
+  @return map.get(map.get($cats, $name), $warmth);
+}
 @mixin highlight($name, $warmth) {
-	background-color: map.get(map.get($cats, $name), $warmth);
+  background-color: categoryColor($name, $warmth);
+}
+
+@mixin flat-button() {
+  font-size: 1em;
+  padding: 0px;
+	border: none;
 }
 
 @mixin category-range($name) {
+  .wedge.hasX {
+    content: "×";
+    transform: translate(50%, 50%);
+  }
+  .bookContainer > .bookPage .#{$name}, button.#{$name} {
+    @include flat-button();
+    @include highlight($name, "warm");
+    color: categoryColor($name, "warmest");
+  }
   .#{$name} input[type="range"]::-webkit-slider-thumb {
     background: map.get(map.get($cats, $name), "warmer");
   }
@@ -68,40 +94,112 @@ $cats: (
   @include category-range($name);
 }
 
+.hide {
+  display: none;
+}
+
+.none .emptyNeedle {
+  clip-path: none;
+  background-color: $none;
+  border-radius: 50%;
+}
+
 .none {
   color: $dark-text;
   background-color: $none;
 }
 
+@include category("other");
 @include category("comedy-0");
+@include category("advice-0");
 @include category("advice-1");
 @include category("advice-2");
-@include category("advice-3");
+
+$minHeight: 300px;
+$maxWidth: 600px;
 
 .mainContainer {
   display: grid;
-	color: $dark-text;
+  color: $dark-text;
   justify-content: center;
-  grid-template-rows: auto 1fr;
+  grid-template-columns: repeat( auto-fit, minmax(25vw, $maxWidth) );
 }
 .contentContainer {
   line-height: 1.7em;
-	display: inline-block;
-  overflow: scroll;
+  display: inline-block;
+  max-width: $maxWidth;
 }
 .contentContainer * {
-	padding: 0.3em;
+  padding: 0.3em;
 }
-/* Range sliders */
-.controlContainer {
-	display: grid;
-	row-gap: 0.1em;
-	column-gap: 0.5em;
-  text-align: center;
+
+$compassDiameter: 6em;
+$compassBorder: minmax(auto, 6em);
+$compassRow: $compassBorder $compassDiameter $compassBorder;
+
+.uiContainer {
+  display: grid;
+  max-height: 90%;
+  z-index: 100;
+  width: 100%;
+  bottom: 0;
+  position: fixed;
+  grid-gap: .333em;
   padding: 0.666em;
-  padding-top: 0.333em;
-  background-color: rgba(252, 220, 230, 0.666);
-	grid-template-columns: repeat(auto-fill, minmax(200px,1fr));
-  position: sticky;
-  top: 0;
+  justify-items: center;
+  align-items: center;
+  pointer-events: none;
+  grid-template: 
+    ". . d ." $compassBorder
+    "x c a e" $compassDiameter
+    "x . b ." $compassBorder / 1fr $compassRow;
+}
+
+$bookTextColor: $dark-text;
+$bookPageColor: $none;
+.bookContainer {
+  width: 100%;
+  grid-area: x;
+  display: grid;
+  font-size: 0.888em;
+  grid-gap: 0.333em;
+  grid-auto-rows: minmax(3em, auto);
+  grid-template-columns: repeat(auto-fit, minmax(5em, auto));
+}
+
+.bookContainer > .bookPage {
+  background-color: $bookPageColor;
+  color: $bookTextColor;
+  padding: .333em;
+  align-self: end;
+}
+
+.bookContainer > .bookPage > * {
+  @include center.center();
+  pointer-events: all;
+}
+
+.uiContainer > *:nth-child(2){
+  pointer-events: all;
+  grid-area: a;
+}
+.uiContainer > *:nth-child(3){
+  pointer-events: all;
+  grid-area: a;
+}
+.uiContainer > *:nth-child(4){
+  pointer-events: all;
+  grid-area: b;
+}
+.uiContainer > *:nth-child(5){
+  pointer-events: all;
+  grid-area: c;
+}
+.uiContainer > *:nth-child(6){
+  pointer-events: all;
+  grid-area: d;
+}
+.uiContainer > *:nth-child(7){
+  pointer-events: all;
+  grid-area: e;
 }

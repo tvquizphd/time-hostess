@@ -19,7 +19,7 @@ import dotenv from 'dotenv'
 import fs from 'fs'
 // Types
 import type {
-  Entries
+  Fn
 } from '../lib/util'
 import type {
   HastParent
@@ -31,15 +31,11 @@ import type {
 
 type GuideAPI = FoundProps 
 type PropNames<T> = (keyof T)[]
-type AllEntries = Entries<FoundProps>
 
 type SomeOptions<T> = PropOptions & {
   propNames: PropNames<T>
 }
 
-interface FilterProps {
-  (n: PropNames<GuideAPI>, e: AllEntries): Entries<GuideAPI>;
-}
 interface FindSomeProps {
   (params: SomeOptions<GuideAPI>): GuideAPI;
 }
@@ -52,28 +48,27 @@ function staticRegenerationError(message) {
 const staticPaths = [
   ...getI18nPaths({ 
     page: BipolarPage,
-    propNames: ['metric', 'keys'],
+    propNames: ['keys'],
     guide: 'sentiment',
     slug: []
   }),
   ...getI18nPaths({
     page: MultiplePersonalityPage,
-    propNames: ['metric', 'keys'],
+    propNames: ['keys'],
     guide: 'personas',
     slug: ['test']
   })
 ]
 
-const filterProps: FilterProps = (propNames, allEntries) => {
-  const filter = ([key, _]) => {
-    return propNames.includes(key)
-  }
-  return allEntries.filter(filter)
-}
-
 const findSomeProps: FindSomeProps  = ({propNames, ...params}) => {
-  const allEntries = Object.entries(findProps(params)) as AllEntries
-  return Object.fromEntries(filterProps(propNames, allEntries))
+  const allProps = findProps(params)
+  return propNames.reduce((o, k) => {
+    return {
+      ...o, [k]: allProps[k]
+    } 
+  }, {
+    keys: []
+  })
 }
 
 export const getStaticPaths = () => {
@@ -120,7 +115,7 @@ export const getStaticProps = async (context) => {
 
   return {
     props: {
-      ...findSomeProps(params),
+      ...findSomeProps({...params, propNames: ['keys']}),
       SECRET: SECRET || null,
       body: body
     },

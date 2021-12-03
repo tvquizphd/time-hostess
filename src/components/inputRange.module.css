@@ -1,3 +1,22 @@
+.labelContainer {
+	display: grid;
+  align-items: center;
+  justify-items: center;
+  justify-content: space-evenly;
+	grid-template-rows: auto auto;
+	grid-template-columns: auto auto;
+}
+
+.labelContainer > button:nth-of-type(2) {
+  grid-column-end: span 2;
+	text-align: center;
+  padding: 0.333em;
+}
+
+.labelContainer button:nth-of-type(2) {
+  order: 4;
+}
+
 .rangeContainer {
 	display: grid;
 	height: 1em;

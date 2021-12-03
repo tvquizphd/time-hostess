@@ -1,0 +1,46 @@
+@use "sass:math";
+
+.root-grid {
+  height: 120%;
+  width: 120%;
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  grid-template-rows: 1fr 1fr 1fr;
+  justify-items: center;
+  align-items: center;
+  clip-path: circle(40%);
+}
+
+.hasX {
+  z-index: 10;
+  display: flex;
+  position: absolute;
+  align-items: center;
+  justify-content: center;
+}
+
+@mixin nav-arrow($indent, $offset) {
+  $x0: 50% - $indent + $offset * 0.75;
+  $x1: 50% + $indent - $offset * 0.75;
+  $y0: 50% - $indent + $offset * 1.1;
+  $ytop: 100% - $offset * 0.5;
+  $ymid: 50% + $offset * 0.5;
+  $polygon: ($x0 $y0, 50% $ytop, $x1 $y0, 50% $ymid);
+  clip-path: polygon(#{$polygon});
+}
+
+.needle {
+  @include nav-arrow(40%, 0%);
+  grid-column-start: 2;
+  grid-row-start: 2;
+  width: 100%;
+  height: 100%; 
+}
+
+.needleFill {
+  @include nav-arrow(40%, 20%);
+  grid-column-start: 2;
+  grid-row-start: 2;
+  width: 100%;
+  height: 100%; 
+}

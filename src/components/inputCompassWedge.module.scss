@@ -1,0 +1,40 @@
+@use "sass:math";
+@use "sass:list";
+
+@mixin nav-wedge($angle) {
+  $offscreen: 10;
+  $x: $offscreen*math.round(math.cos(90deg+$angle*0.5)*100%);
+  $y: $offscreen*math.round(math.sin(90deg+$angle*0.5)*100%);
+
+  $polygon: (50%-$x 50%+$y, 50% 50%, 50%+$x 50%+$y);
+  clip-path: polygon(#{$polygon});
+}
+
+.wedge {
+  grid-column-end: span 3;
+  grid-row-end: span 3;
+  grid-column-start: 1;
+  grid-row-start: 1;
+  width: 100%;
+  height: 100%;
+}
+
+@mixin wedge($angle) {
+  .wedge-#{$angle} {
+    @include nav-wedge($angle);
+  }
+}
+
+$d2: 2deg;
+$d2-inverse: 0.5;
+@for $angleIndex from 0 through 180 * $d2-inverse {
+  @include wedge($angleIndex * $d2);
+}
+
+.wedge-180deg {
+  clip-path: inset(0 0 50% 0);
+}
+
+.wedge-0deg {
+  display: none;
+}

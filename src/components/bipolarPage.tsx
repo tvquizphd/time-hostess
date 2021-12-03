@@ -14,16 +14,30 @@ import {
 import InputRange from './inputRange'
 import Content from './content'
 
+const COLORS = [
+  'coolest', 'cooler', 'cool',
+  'none',
+  'warm', 'warmer', 'warmest'
+]
+
 const valueToStyle = (options) => {
-  const {range} = options
-  const value = extractGuidance(options)
-  const colors = [
-    'coolest', 'cooler', 'cool',
-    'none',
-    'warm', 'warmer', 'warmest'
-  ]
-  const color = selectFromList(value, range, colors)
+  const {metric, range, node, keys} = options
+  const value = extractGuidance({
+    node, keys, metric,
+    weighKey: (_) => 1
+  })
+  const color = selectFromList({
+    value, range, items: COLORS
+  })
   return styles[color]
+}
+
+const styler = ({range, metric}) => {
+  return ({node, keys}) => {
+    return valueToStyle({
+      metric, range, node, keys
+    })
+  }
 }
 
 const BipolarPage = (props) => {
@@ -31,29 +45,50 @@ const BipolarPage = (props) => {
   const [rangeMin, setRangeMin] = useState(-0.5)
   const [rangeMax, setRangeMax] = useState(0.5)
 
+  const coolInputClass = {
+    root: [styles['cooler-range']],
+    label: [styles['cool-range']],
+    plus: [styles.coolest]
+  }
+  const warmInputClass = {
+    root: [styles['warmer-range']],
+    label: [styles['warm-range']],
+    plus: [styles.warmest]
+  }
+
   return (
     <div className={styles.mainContainer}>
 			<div className={styles.controlContainer}>
 				<InputRange {...{
-          cls: ['warmer-range', 'warmest'].map(k=>styles[k]),
-          setter: setRangeMax, value: rangeMax, limit: [+1, 0],
-          label: "Optimism"
+          category: {
+            setter: setRangeMax,
+            value: rangeMax,
+            canClear: false,
+            keys: [null]
+          }, limit: [+1, 0],
+          label: "Optimism", cls: warmInputClass
         }}/> 
 				<InputRange {...{
-          cls: ['cooler-range', 'coolest'].map(k=>styles[k]),
-          setter: setRangeMin, value: rangeMin, limit: [-1, 0],
-          label: "Pessimism"
+          category: {
+            setter: setRangeMin,
+            value: rangeMin,
+            canClear: false,
+            keys: [null]
+          }, limit: [-1, 0],
+          label: "Pessimism", cls: coolInputClass
         }}/> 
 			</div>
       <div className={styles.contentContainer}>
         <Content {...{
           ...props,
-          valueToStyle,
-          range: {
-            min: rangeMin,
-            max: rangeMax
-          },
-          weighKey: (_) => 1
+          valueToStyle: styler({
+            metric: 'mean',
+            range: {
+              min: rangeMin,
+              max: rangeMax
+            }
+          }),
+          guideAll: true
         }}/>
       </div>
     </div>

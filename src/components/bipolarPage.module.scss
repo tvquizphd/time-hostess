@@ -13,11 +13,21 @@ $colors: (
   "warmest": rgb(179,88,6),
 );
 
+$most: (
+  "coolest": map.get($colors, "coolest"),
+  "cooler": map.get($colors, "coolest"), 
+  "cool": map.get($colors, "coolest"),
+  "none": $dark-text,
+  "warm": map.get($colors, "warmest"),
+  "warmer": map.get($colors, "warmest"),
+  "warmest": map.get($colors, "warmest"),
+);
+
 $text-colors: (
   "coolest": $light-text,
   "cooler": $dark-text,
   "cool": $dark-text,
-  "node": $dark-text,
+  "none": $dark-text,
   "warm": $dark-text,
   "warmer": $dark-text,
   "warmest": $light-text,
@@ -27,7 +37,18 @@ $text-colors: (
 	background-color: map.get($colors, $color);
 }
 
+@mixin flat-button() {
+  font-size: 1.2em;
+  padding: 0px;
+	border: none;
+}
+
 @mixin category-range($color) {
+  button.#{$color}-range {
+    @include flat-button();
+    @include highlight($color);
+    color: map.get($most, $color);
+  }
   .#{$color}-range input[type="range"]::-webkit-slider-thumb {
     background: map.get($colors, $color);
   }

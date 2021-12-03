@@ -14,33 +14,33 @@ const noNode = (props) => {
 }
 
 const isGuideButton = (node) => {
-  const {className} = node?.properties
-  return className?.includes('guide-button')
+  const {className} = node.properties
+  return (className || []).includes('guide-button')
 }
 
 const isGuideNone = (node) => {
-  const {className} = node?.properties
-  return className?.includes('guide-ignore')
+  const {className} = node.properties
+  return !(className || []).includes('guide')
 }
 
-const onClick = (node, clickGuideButton) => {
+const onClick = (options) => {
+  const {node, clickGuideButton} = options
   const canClick = isGuideButton(node) && clickGuideButton
   if (canClick) {
     return (e) => {
-      clickGuideButton(node)
+      clickGuideButton(options)
     }
   }
   return null
 }
 
-
 const styleGuide = (options) => {
-  const {valueToStyle, node} = options
-  return isGuideNone(node) ? '' : valueToStyle(options)
+  const {valueToStyle, guideAll, node} = options
+  const hasGuideStyle = guideAll || !isGuideNone(node)
+  return hasGuideStyle ? valueToStyle(options) : ''
 }
 
 const GuideElement = (TagName, options) => {
-  const {clickGuideButton} = options
   // A component that styles arbitarty tags
   return (props) => {
     const {node} = props
@@ -51,9 +51,9 @@ const GuideElement = (TagName, options) => {
 
     return (
       <TagName 
-        onClick={onClick(node, clickGuideButton)}
-        className={divStyle}
         {...noNode(props)}
+        className={divStyle}
+        onClick={onClick({...options, node})}
       >
         {props.children}
       </TagName>
