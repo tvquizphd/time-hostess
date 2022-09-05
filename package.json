@@ -31,5 +31,10 @@
     "fs-extra": "^10.1.0",
     "tree-guards": "^1.0.0-alpha.1.0",
     "typescript": "4.8.2"
+  },
+  "pnpm": {
+    "overrides": {
+      "nth-check@^2.0.0": "2.0.0"
+    }
   }
 }

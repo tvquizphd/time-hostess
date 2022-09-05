@@ -1,5 +1,8 @@
 lockfileVersion: 5.4
 
+overrides:
+  nth-check@^2.0.0: 2.0.0
+
 specifiers:
   '@types/node': ^18.7.15
   '@types/react': ^18.0.18
@@ -2376,8 +2379,8 @@ packages:
     engines: {node: '>=0.10.0'}
     dev: false
 
-  /nth-check/2.1.1:
-    resolution: {integrity: sha512-lqjrjmaOoAnWfMmBPL+XNnynZh2+swxiX3WUE0s4yEHI6m+AwrK2UZOimIRl3X/4QctVqS8AiZjFqyOGrMXb/w==}
+  /nth-check/2.0.0:
+    resolution: {integrity: sha512-i4sc/Kj8htBrAiH1viZ0TgU8Y5XqCaV/FziYK6TBczxmeKm3AEFWqqF3195yKudrarqy7Zu80Ra5dobFjn9X/Q==}
     dependencies:
       boolbase: 1.0.0
     dev: false
@@ -3046,7 +3049,7 @@ packages:
     dependencies:
       '@types/unist': 2.0.6
       css-selector-parser: 1.4.1
-      nth-check: 2.1.1
+      nth-check: 2.0.0
       unist-util-is: 5.1.1
       zwitch: 2.0.2
     dev: false
