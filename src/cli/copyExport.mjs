@@ -5,7 +5,7 @@ import path from 'path'
 
 const configure = () => {
   const {version, name} = modulePackage
-  const input = path.resolve('./out')
+  const input = path.resolve('./pages')
   const root = path.join(homedir(),`${name}-builds`)
   const output = path.join(root, `${name}-${version}`)
   return {input, output}

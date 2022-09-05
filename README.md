@@ -2,23 +2,22 @@
 ## Install dependencies
 
 ```
-curl -fsSL https://deb.nodesource.com/setup_16.x | bash -
-apt-get install -y nodejs
-npm install --global yarn
+wget -qO- https://get.pnpm.io/install.sh | sh -
+pnpm env use 18
 ```
 
 Download and install the project.
 
 ```
-git clone git@github.com:tvquizphd/time-mistress.git
-yarn install
+git clone git@github.com:tvquizphd/time-hostess.git
+pnpm install
 ```
 
 ## Run dev server
 
 Run the development server:
 ```
-yarn dev
+pnpm dev
 ```
 
 On a local machine, ssh tunnel into the debugger
@@ -27,11 +26,11 @@ ssh -nNT -L 8888:localhost:8888 root@time-hostess.com
 ## Build to static files
 
 ```
-yarn out
+pnpm pages 
 VERSION=$(node -pe "require('./package.json')['version']")
 OUTPUT=time-hostess-$VERSION
 PREFIX=~/time-hostess-builds
-cp -a ./out/. $PREFIX/$OUTPUT/
+cp -a ./pages/. $PREFIX/$OUTPUT/
 ```
 
 ## Run production server
@@ -39,7 +38,7 @@ cp -a ./out/. $PREFIX/$OUTPUT/
 Install dependencies
 
 ```
-yarn global add pm2
+pnpm add -g pm2
 apt-get install nginx -y
 apt-get install certbot -y
 apt-get install python3-certbot-nginx -y
