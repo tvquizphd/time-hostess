@@ -17,18 +17,18 @@
     "dotenv": "^10.0.0",
     "hot-cold-guide": "^1.0.0-alpha.8.6",
     "hot-cold-retext": "^1.0.0-alpha.3.6",
-    "next": "^12.0.4",
+    "next": "^12.2.5",
     "react": "^17.0.2",
     "react-dom": "^17.0.2",
-    "sass": "^1.43.4",
+    "sass": "^1.54.8",
     "tree-guards": "^1.0.0-alpha.1.0",
     "unist-util-select": "^4.0.1"
   },
   "devDependencies": {
     "@types/node": "^18.7.15",
-    "eslint": "<8.0.0",
+    "eslint": "^7.32.0",
     "eslint-config-next": "12.0.4",
-    "fs-extra": "^10.0.0",
+    "fs-extra": "^10.1.0",
     "tree-guards": "^1.0.0-alpha.1.0",
     "typescript": "4.4.4"
   }
