@@ -4,7 +4,7 @@ import {
 /*
  * Map domain of [0 to 1] to range of [Y to 0]
  */
-type Point = [number, number]
+export type Point = [number, number]
 type Slope = Fn<[Point, Point], number>
 type SlopeFixed = UnaryFn<Point, number>
 type Clamp = Fn<[Point, number], number>

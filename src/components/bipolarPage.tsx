@@ -17,6 +17,8 @@ import {
 import InputRange from './inputRange'
 import Content from './content'
 
+import type { Point } from '../lib/rangeSetter'
+
 const COLORS = [
   'coolest', 'cooler', 'cool',
   'none',
@@ -67,8 +69,8 @@ const BipolarPage = (props) => {
   const [contrast, setContrast] = useState(0.2);
   const [pushed, push] = React.useState(1);
   const toMean = (p) => [0.5, 0, -0.5][p];
-  const lowRange = [-1, toMean(pushed)];
-  const highRange = [1, toMean(pushed)];
+  const lowRange: Point = [-1, toMean(pushed)];
+  const highRange: Point = [1, toMean(pushed)];
   const items = [
     ["Negative Filter", styles.coolUI],
     ["No Filter", styles.noneUI],
