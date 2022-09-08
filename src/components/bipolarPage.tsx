@@ -99,14 +99,6 @@ const BipolarPage = (props) => {
 				An optimist may add an uplifting bias with the
 				&quot;Positive Filter&quot;.
 			</p>
-			<p>
-				Whether using either filter (or no filter), 
-				you can control the certainty of the classifier.
-				Just slide the controller handle
-				(<FontAwesomeIcon icon={faLeftRight} />) from 
-        left (<FontAwesomeIcon icon={faEyeSlash} />)
-        to right (<FontAwesomeIcon icon={faEye} />).
-			</p>
 			<div className={navContainer}>
 				<Navigrid {...gridProps}>
 					<Ingrid {...{items, pushed, push}}/>
@@ -135,6 +127,14 @@ const BipolarPage = (props) => {
           guideAll: true
         }}/>
       </div>
+			<p>
+				Whether using either filter (or no filter), 
+				you can control the certainty of the classifier.
+				Just slide the controller handle
+				(<FontAwesomeIcon icon={faLeftRight} />) from 
+        left (<FontAwesomeIcon icon={faEyeSlash} />)
+        to right (<FontAwesomeIcon icon={faEye} />).
+			</p>
 			<div className={styles.footer}>
 				<a href="https://tvquizphd.com">TVQuizPhD.com</a>
 			</div>

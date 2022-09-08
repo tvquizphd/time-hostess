@@ -19,14 +19,16 @@
 }
 .rangeContainer input[type=range]::-moz-range-thumb {
 	border-radius: 50%;
+  clip-path: path('M0,10 l20,10 l0,-5, l50,0 l0,5 l20,-10 l-20,-10 l0,5 l-50,0 l0,-5Z');
 	border: none;
 	height: 20px;
-	width: 33%;
+	width: 90px;
 }
 .rangeContainer input[type=range]::-ms-thumb {
-	border-radius: 50%;
+  clip-path: path('M0,10 l20,10 l0,-5, l50,0 l0,5 l20,-10 l-20,-10 l0,5 l-50,0 l0,-5Z');
+	border: none;
 	height: 20px;
-	width: 33%;
+	width: 90px;
 }
 .down {
   background-color: #FFFFFF;
