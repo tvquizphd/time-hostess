@@ -1,64 +1,42 @@
-.labelContainer {
-	display: grid;
-  align-items: center;
-  justify-items: center;
-  justify-content: space-evenly;
-	grid-template-rows: auto auto;
-	grid-template-columns: auto auto;
-}
-
-.labelContainer > button:nth-of-type(2) {
-  grid-column-end: span 2;
-	text-align: center;
-  padding: 0.333em;
-}
-
-.labelContainer button:nth-of-type(2) {
-  order: 4;
-}
-
 .rangeContainer {
 	display: grid;
-	height: 1em;
 	border-radius: 50%;
 	grid-template-columns: auto minmax(auto, 3fr) auto;
 }
 .rangeContainer input[type=range]{
   -webkit-appearance: none;
-  padding-bottom: 1em;
-  padding-top: 1em;
-  margin-top: -1em;
-  background: none;
+  background-color: rgba(0,0,0,0);
+}
+.rangeWrapper {
+	position: relative;
 }
 .rangeContainer input[type=range]::-webkit-slider-thumb {
 	-webkit-appearance: none;
-  transform: translateY(-2px);
-	border-radius: 50%;
+  clip-path: path('M0,10 l20,10 l0,-5, l50,0 l0,5 l20,-10 l-20,-10 l0,5 l-50,0 l0,-5Z');
 	border: none;
 	height: 20px;
-	width: 33%;
+	width: 90px;
 }
 .rangeContainer input[type=range]::-moz-range-thumb {
-  transform: translateY(-2px);
 	border-radius: 50%;
 	border: none;
 	height: 20px;
 	width: 33%;
 }
 .rangeContainer input[type=range]::-ms-thumb {
-  transform: translateY(-2px);
 	border-radius: 50%;
 	height: 20px;
 	width: 33%;
 }
 .down {
-  background-color: rgb(247,247,247);
+  background-color: #FFFFFF;
+  box-shadow: -2px 2px 5px rgb(28, 28, 28);
 }
 .round {
 	border-radius: 50%;
   font-size: 1.2em;
   display: flex;
-  align-items: center; 
+  align-items: center;
   justify-content: center;
   transform: translateY(-6px);
   padding: 0px;

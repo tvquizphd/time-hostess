@@ -1,8 +1,11 @@
 import React, { useState } from 'react'
 import styles from './bipolarPage.module.scss'
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { faLeftRight, faEyeSlash, faEye } from '@fortawesome/free-solid-svg-icons'
+import { Navigrid } from './templates/navigrid'
+import { Ingrid } from './templates/ingrid'
 import {
-  toDomain,
-  makeRangeSetter
+  toRange,
 } from '../lib/rangeSetter'
 import {
   extractGuidance
@@ -42,41 +45,80 @@ const styler = ({range, metric}) => {
 
 const BipolarPage = (props) => {
 
-  const [rangeMin, setRangeMin] = useState(-0.5)
-  const [rangeMax, setRangeMax] = useState(0.5)
-
   const coolInputClass = {
-    root: [styles['cooler-range']],
-    label: [styles['cool-range']],
-    plus: [styles.coolest]
+    root: [styles['darkUI-range']],
+    plus: [styles.cooler]
+  }
+  const noneInputClass = {
+    root: [styles['darkUI-range']],
+    plus: [styles.noneUI]
   }
   const warmInputClass = {
-    root: [styles['warmer-range']],
-    label: [styles['warm-range']],
-    plus: [styles.warmest]
+    root: [styles['darkUI-range']],
+    plus: [styles.warmer]
   }
+
+  const gridProps = {
+    n: '3',
+    w: '1fr'
+  }
+
+  const maxContrast = 0.8;
+  const [contrast, setContrast] = useState(0.2);
+  const [pushed, push] = React.useState(1);
+  const toMean = (p) => [0.5, 0, -0.5][p];
+  const lowRange = [-1, toMean(pushed)];
+  const highRange = [1, toMean(pushed)];
+  const items = [
+    ["Negative Filter", styles.coolUI],
+    ["No Filter", styles.noneUI],
+    ["Positive Filter", styles.warmUI],
+  ];
+  const navContainer = [
+    styles.coolestContainer,
+    styles.darkUIContainer,
+    styles.warmestContainer
+  ][pushed];
+  const inputClass = [
+    coolInputClass,
+    noneInputClass,
+    warmInputClass
+  ][pushed];
+  const rangeMin = toRange(lowRange, contrast);
+  const rangeMax = toRange(highRange, contrast);
 
   return (
     <div className={styles.mainContainer}>
-			<div className={styles.controlContainer}>
+			<h2> Sentiment Analysis </h2>
+			<p>
+				The below song lyrics show negative vibes in purple,
+				with positive vibes shown in orange. A pessimist may
+				add a depressed bias with the "Negative Filter".
+				An optimist may add an uplifting bias with the
+				"Positive Filter".
+			</p>
+			<p>
+				Whether using either filter (or no filter), 
+				you can control the certainty of the classifier.
+				Just slide the controller handle
+				(<FontAwesomeIcon icon={faLeftRight} />) from 
+        left (<FontAwesomeIcon icon={faEyeSlash} />)
+        to right (<FontAwesomeIcon icon={faEye} />).
+			</p>
+			<div className={navContainer}>
+				<Navigrid {...gridProps}>
+					<Ingrid {...{items, pushed, push}}/>
+				</Navigrid>
 				<InputRange {...{
-          category: {
-            setter: setRangeMax,
-            value: rangeMax,
-            canClear: false,
-            keys: [null]
-          }, limit: [+1, 0],
-          label: "Optimism", cls: warmInputClass
-        }}/> 
-				<InputRange {...{
-          category: {
-            setter: setRangeMin,
-            value: rangeMin,
-            canClear: false,
-            keys: [null]
-          }, limit: [-1, 0],
-          label: "Pessimism", cls: coolInputClass
-        }}/> 
+					limit: [0, maxContrast],
+					cls: inputClass,
+					category: {
+						setter: setContrast,
+						value: contrast,
+						canClear: false,
+						keys: [null]
+					}
+				}}/> 
 			</div>
       <div className={styles.contentContainer}>
         <Content {...{
@@ -91,6 +133,9 @@ const BipolarPage = (props) => {
           guideAll: true
         }}/>
       </div>
+			<div className={styles.footer}>
+				<a href="https://tvquizphd.com">TVQuizPhD.com</a>
+			</div>
     </div>
   )
 }

@@ -7,6 +7,9 @@ import {
   clicker 
 } from '../lib/clicker'
 import styles from './inputRange.module.css'
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { faEyeSlash, faEye } from '@fortawesome/free-solid-svg-icons'
+
 
 const makeRange = ({range, onChange, steps, inputValue}) => {
   return (
@@ -29,7 +32,7 @@ const handler = ({valueSetter}) => {
 }
 
 const InputRange = (props) => {
-  const { limit, label, category, hideRange } = props
+  const { limit, category, hideRange } = props
   const { setter, value, canClear } = category
   const valueSetter = makeRangeSetter({limit, setter})
   const inputValue = toDomain(limit, value)
@@ -49,23 +52,10 @@ const InputRange = (props) => {
     valueSetter(inputValue + steps.big)
   }
   const toggleClick = clicker({category, range, steps})
-
-  const labelClass = props.cls.label.join(' ')
-  const closeX = canClear? '× ' : null
-  const spans = closeX ? [closeX, label] : [label]
-  const labelContent = (
-    <button className={labelClass} onClick={toggleClick}>
-      {spans.map((k,i) => <span key={i}>{k}</span>)}
-    </button>
-  )
   const inputContent = makeRange({
     range, steps, inputValue,
     onChange: handler({valueSetter})
   })
-  const topContent = !hideRange ? labelContent : null
-  const coreContent = !hideRange ? inputContent : labelContent
-  const containerName = !hideRange ? 'range' : 'label'
-
   const buttonMinusClass = [
     styles.round, styles.down
   ].join(' ')
@@ -74,22 +64,24 @@ const InputRange = (props) => {
     ...props.cls.plus
   ].join(' ')
   const className = [
-    styles[containerName+'Container'],
+    styles['rangeContainer'],
     ...props.cls.root
   ].join(' ')
 
+  const divProps = {
+    className,
+  }
   return (
-    <div>	
-      {topContent}
+    <div className={styles.rangeWrapper}>	
 			<div className={className}>
 				<button className={buttonMinusClass}
           onClick={minusClick}>
-          -
+          <FontAwesomeIcon icon={faEyeSlash} />
         </button>
-        {coreContent}
+        {inputContent}
 				<button className={buttonPlusClass}
           onClick={plusClick}>
-          +
+          <FontAwesomeIcon icon={faEye} />
         </button>
 			</div>
     </div>

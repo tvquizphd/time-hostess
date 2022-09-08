@@ -2,8 +2,8 @@
 ## Install dependencies
 
 ```
-wget -qO- https://get.pnpm.io/install.sh | sh -
-pnpm env use 18
+curl -fsSL https://get.pnpm.io/install.sh | sh -
+pnpm env use 18 --global
 ```
 
 Download and install the project.
