@@ -99,21 +99,9 @@ const BipolarPage = (props) => {
 				An optimist may add an uplifting bias with the
 				&quot;Positive Filter&quot;.
 			</p>
-			<div className={navContainer}>
 				<Navigrid {...gridProps}>
 					<Ingrid {...{items, pushed, push}}/>
-				</Navigrid>
-				<InputRange {...{
-					limit: [0, maxContrast],
-					cls: inputClass,
-					category: {
-						setter: setContrast,
-						value: contrast,
-						canClear: false,
-						keys: [null]
-					}
-				}}/> 
-			</div>
+				</Navigrid>	
       <div className={styles.contentContainer}>
         <Content {...{
           ...props,
@@ -127,6 +115,18 @@ const BipolarPage = (props) => {
           guideAll: true
         }}/>
       </div>
+      <div className={navContainer}>
+				<InputRange {...{
+					limit: [0, maxContrast],
+					cls: inputClass,
+					category: {
+						setter: setContrast,
+						value: contrast,
+						canClear: false,
+						keys: [null]
+					}
+				}}/> 
+			</div>
 			<p>
 				Whether using either filter (or no filter), 
 				you can control the certainty of the classifier.
