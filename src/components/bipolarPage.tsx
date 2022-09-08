@@ -93,9 +93,9 @@ const BipolarPage = (props) => {
 			<p>
 				The below song lyrics show negative vibes in purple,
 				with positive vibes shown in orange. A pessimist may
-				add a depressed bias with the "Negative Filter".
+				add a depressed bias with the &quot;Negative Filter&quot;.
 				An optimist may add an uplifting bias with the
-				"Positive Filter".
+				&quot;Positive Filter&quot;.
 			</p>
 			<p>
 				Whether using either filter (or no filter), 

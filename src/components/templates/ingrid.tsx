@@ -4,9 +4,9 @@ const Ingrid = ({ items, pushed, push }) => {
     const c = [ cls, ...p.split(" ") ];
     const className = c.join(" ");
     const onClick = () => push(key);
-    const dProps = { key, className, onClick };
+    const dProps = { className, onClick };
     return (
-      <div {...dProps}>{text}</div>
+      <div key={key} {...dProps}>{text}</div>
     );
   });
 }
