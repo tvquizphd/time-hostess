@@ -77,7 +77,7 @@ const BipolarPage = (props) => {
     ["Positive Filter", styles.warmUI],
   ];
   const navContainer = [
-    styles.coolestContainer,
+    styles.iceUIContainer,
     styles.darkUIContainer,
     styles.fireUIContainer
   ][pushed];

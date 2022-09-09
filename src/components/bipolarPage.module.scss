@@ -4,6 +4,7 @@ $light-text: rgb(240,240,240);
 $dark-text: rgb(16,16,16);
 
 $colors: (
+  "iceUI": rgb(60,0,200),
   "coolest": rgb(37,7,83),
   "cooler": rgb(142,97,209),
   "cool": rgb(207,204,229),
@@ -19,6 +20,7 @@ $colors: (
 );
 
 $text-colors: (
+  "iceUI": $light-text,
   "coolest": $light-text,
   "cooler": $dark-text,
   "cool": $dark-text,
@@ -51,7 +53,7 @@ $noise: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' wid
   background:
     linear-gradient(to right, transparent, map.get($colors, $color)),
     url(https://grainy-gradients.vercel.app/noise.svg);
-  filter: contrast(400%) brightness(400%);
+  filter: contrast(400%) brightness(600%);
 	image-rendering: pixelated;
 }
 
@@ -99,7 +101,7 @@ $noise: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' wid
   @include category-range($color);
 }
 
-$colorList: "coolest", "cooler", "cool", "none", "warm", "warmer", "warmest", "coolUI", "warmUI", "noneUI", "darkUI", "fireUI";
+$colorList: "iceUI", "coolest", "cooler", "cool", "none", "warm", "warmer", "warmest", "coolUI", "warmUI", "noneUI", "darkUI", "fireUI";
 @each $color in $colorList {
   @include category($color)
 }
