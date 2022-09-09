@@ -91,8 +91,8 @@ const BipolarPage = (props) => {
 
   return (
     <div className={styles.mainContainer}>
+      <h2> Sentiment Analysis </h2>
 			<p>
-        <h3> Sentiment Analysis </h3>
 				The below song lyrics show negative vibes in purple,
 				with positive vibes shown in orange. A pessimist may
 				add a depressed bias with the &quot;Negative Filter&quot;.

@@ -12,20 +12,19 @@
 }
 .rangeContainer input[type=range]::-webkit-slider-thumb {
 	-webkit-appearance: none;
-  clip-path: path('M0,10 l20,10 l0,-5, l50,0 l0,5 l20,-10 l-20,-10 l0,5 l-50,0 l0,-5Z');
+  clip-path: path('M 0 10 L 20 20 L 20 15 L 70 15 L 70 20 L 90 10 L 70 0 L 70 5 L 20 5 L 20 0 Z');
 	border: none;
 	height: 20px;
 	width: 90px;
 }
 .rangeContainer input[type=range]::-moz-range-thumb {
-	border-radius: 50%;
-  clip-path: path('M0,10 l20,10 l0,-5, l50,0 l0,5 l20,-10 l-20,-10 l0,5 l-50,0 l0,-5Z');
+  clip-path: path('M 0 10 L 20 20 L 20 15 L 70 15 L 70 20 L 90 10 L 70 0 L 70 5 L 20 5 L 20 0 Z');
 	border: none;
 	height: 20px;
 	width: 90px;
 }
 .rangeContainer input[type=range]::-ms-thumb {
-  clip-path: path('M0,10 l20,10 l0,-5, l50,0 l0,5 l20,-10 l-20,-10 l0,5 l-50,0 l0,-5Z');
+  clip-path: path('M 0 10 L 20 20 L 20 15 L 70 15 L 70 20 L 90 10 L 70 0 L 70 5 L 20 5 L 20 0 Z');
 	border: none;
 	height: 20px;
 	width: 90px;
