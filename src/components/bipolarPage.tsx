@@ -79,7 +79,7 @@ const BipolarPage = (props) => {
   const navContainer = [
     styles.coolestContainer,
     styles.darkUIContainer,
-    styles.warmestContainer
+    styles.fireUIContainer
   ][pushed];
   const inputClass = [
     coolInputClass,

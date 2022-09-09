@@ -15,6 +15,7 @@ $colors: (
   "warmUI": rgb(253,184,99),
   "warmer": rgb(241,163,64),
   "warmest": rgb(179,88,6),
+  "fireUI": rgb(140,44,0),
 );
 
 $text-colors: (
@@ -29,6 +30,7 @@ $text-colors: (
   "warmUI": $dark-text,
   "warmer": $dark-text,
   "warmest": $light-text,
+  "fireUI": $light-text,
 );
 
 $noise: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='500' height='500'> <filter id='noise' x='0' y='0'> <feTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='3' stitchTiles='stitch'/> <feBlend mode='screen'/> </filter> <rect width='500' height='500' filter='url(#noise)' opacity='0.5'/> </svg>");
@@ -49,7 +51,7 @@ $noise: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' wid
   background:
     linear-gradient(to right, transparent, map.get($colors, $color)),
     url(https://grainy-gradients.vercel.app/noise.svg);
-  filter: contrast(200%) brightness(400%);
+  filter: contrast(300%) brightness(400%);
 	image-rendering: pixelated;
 }
 
@@ -97,7 +99,7 @@ $noise: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' wid
   @include category-range($color);
 }
 
-$colorList: "coolest", "cooler", "cool", "none", "warm", "warmer", "warmest", "coolUI", "warmUI", "noneUI", "darkUI";
+$colorList: "coolest", "cooler", "cool", "none", "warm", "warmer", "warmest", "coolUI", "warmUI", "noneUI", "darkUI", "fireUI";
 @each $color in $colorList {
   @include category($color)
 }
