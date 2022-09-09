@@ -49,7 +49,7 @@ $noise: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' wid
   background:
     linear-gradient(to right, transparent, map.get($colors, $color)),
     url(https://grainy-gradients.vercel.app/noise.svg);
-  filter: contrast(200%) brightness(300%);
+  filter: contrast(200%) brightness(400%);
 	image-rendering: pixelated;
 }
 
@@ -108,9 +108,10 @@ $colorList: "coolest", "cooler", "cool", "none", "warm", "warmer", "warmest", "c
   grid-template-rows: auto 1fr;
 }
 .mainContainer p {
-	margin-block-start: 0.1em;
+	margin-block-start: 0.125em;
   margin-right: 0.25em;
   margin-left: 0.25em;
+  font-size: 1.25em;
 }
 .contentContainer {
   line-height: 1.7em;
