@@ -51,7 +51,7 @@ $noise: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' wid
   background:
     linear-gradient(to right, transparent, map.get($colors, $color)),
     url(https://grainy-gradients.vercel.app/noise.svg);
-  filter: contrast(300%) brightness(400%);
+  filter: contrast(400%) brightness(400%);
 	image-rendering: pixelated;
 }
 
